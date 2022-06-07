@@ -33,12 +33,12 @@ public class Memo_daily extends AppCompatActivity {
     private static final int REQ_CODE_MEMO = 300;
 
     Bitmap bitmap, imageBitmap;
-    Button btn2, btn3, btn4, btn5, btn6, btn7, btn8, btn9, btn10;
-    RadioGroup rg;
+    Button btn1_d, btn2_d, btn3_d, btn4_d, btn5_d, album_btn1, album_btn2, album_btn3, album_btn4;
+    RadioGroup rg_d;
     RadioButton rb, rb2, rb3;
     EditText et1;
     TextView tv25;
-    ImageView iv2, iv3, iv4, iv5;
+    ImageView iv1_d, iv2_d, album_iv1;
 
     View albumdialog;
     Canvas canvas;
@@ -56,47 +56,46 @@ public class Memo_daily extends AppCompatActivity {
         setContentView(R.layout.activity_memo_daily);
         ActivityCompat.requestPermissions(this, new String[]
                 {android.Manifest.permission.CAMERA}, MODE_PRIVATE);
-        btn2 = findViewById(R.id.button2);
-        btn3 = findViewById(R.id.button3);
-        btn4 = findViewById(R.id.button4);
-        btn5 = findViewById(R.id.button5);
-        btn6 = findViewById(R.id.button6);
-        btn7 = findViewById(R.id.button7);
-        btn8 = findViewById(R.id.button8);
-        btn9 = findViewById(R.id.button9);
-        btn10 = findViewById(R.id.button10);
-        rg = findViewById(R.id.radioGroup);
-        rb = findViewById(R.id.radioButton);
-        rb2 = findViewById(R.id.radioButton2);
-        rb3 = findViewById(R.id.radioButton3);
-        et1 = findViewById(R.id.editText1);
-        tv25 = findViewById(R.id.textView25);
-        iv2 = findViewById(R.id.imageView2);
-        iv3 = findViewById(R.id.imageView3);
-        iv4 = findViewById(R.id.imageView4);
-        iv5 = findViewById(R.id.imageView5);
+        btn1_d = findViewById(R.id.btn1_d);
+        btn2_d = findViewById(R.id.btn2_d);
+        btn3_d = findViewById(R.id.btn3_d);
+        btn4_d = findViewById(R.id.btn4_d);
+        btn5_d = findViewById(R.id.btn5_d);
+        album_btn1 = findViewById(R.id.album_btn1);
+        album_btn2 = findViewById(R.id.album_btn2);
+        album_btn3 = findViewById(R.id.album_btn3);
+        album_btn4 = findViewById(R.id.album_btn4);
+        rg_d = findViewById(R.id.rg_d);
+        rb = findViewById(R.id.rb1_d);
+        rb2 = findViewById(R.id.rb2_d);
+        rb3 = findViewById(R.id.rb3_d);
+        et1 = findViewById(R.id.et1_d);
+        tv25 = findViewById(R.id.tv2_d);
+        iv1_d = findViewById(R.id.iv1_d);
+        iv2_d = findViewById(R.id.iv2_d);
+        album_iv1 = findViewById(R.id.album_iv1);
 
         // close
-        btn2.setOnClickListener(new View.OnClickListener() {
+        btn1_d.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
             }
         });
 
         // 저장하기
-        btn3.setOnClickListener(new View.OnClickListener() {
+        btn2_d.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
             }
         });
 
         // 앨범 아이콘 선택 시 대화창
-        btn5.setOnClickListener(new View.OnClickListener() {
+        btn4_d.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 albumdialog = View.inflate(Memo_daily.this, R.layout.albumdialog, null);
-                iv4 = albumdialog.findViewById(R.id.imageView4);
-                btn7 = albumdialog.findViewById(R.id.button7);
+                album_iv1 = albumdialog.findViewById(R.id.album_iv1);
+                album_btn1 = albumdialog.findViewById(R.id.album_btn1);
                 new AlertDialog.Builder(Memo_daily.this)
                         .setTitle("사진 선택")
                         .setIcon(R.drawable.photo)
@@ -104,8 +103,8 @@ public class Memo_daily extends AppCompatActivity {
                         .setPositiveButton("확인", new DialogInterface.OnClickListener() {
                             @Override
                             public void onClick(DialogInterface dialogInterface, int i) {
-                                iv2.setImageBitmap(imageBitmap); // 카메라 사진
-                                iv3.setImageBitmap(bitmap); // 앨범 사진
+                                iv1_d.setImageBitmap(imageBitmap); // 카메라 사진
+                                iv2_d.setImageBitmap(bitmap); // 앨범 사진
                                 Toast.makeText(getApplicationContext(), "사진을 선택했습니다.", Toast.LENGTH_SHORT).show();
                             }
                         })
@@ -120,7 +119,7 @@ public class Memo_daily extends AppCompatActivity {
         });
 
         // 지도 보기
-        btn6.setOnClickListener(new View.OnClickListener() {
+        btn5_d.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(getApplicationContext(), com.example.termproject.Map.class);
@@ -129,21 +128,21 @@ public class Memo_daily extends AppCompatActivity {
         });
 
         // "감정" 버튼 클릭 시 색상 변경
-        rg.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
+        rg_d.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
             @Override
             public void onCheckedChanged(RadioGroup group, int checkedId) {
                 switch (checkedId) {
-                    case R.id.radioButton: // 좋음
+                    case R.id.rb1_d: // 좋음
                         rb.setButtonTintList(ColorStateList.valueOf(Color.parseColor("#002EFF")));
                         rb2.setButtonTintList(ColorStateList.valueOf(Color.parseColor("#000000")));
                         rb3.setButtonTintList(ColorStateList.valueOf(Color.parseColor("#000000")));
                         break;
-                    case R.id.radioButton2: // 중간
+                    case R.id.rb2_d: // 중간
                         rb.setButtonTintList(ColorStateList.valueOf(Color.parseColor("#000000")));
                         rb2.setButtonTintList(ColorStateList.valueOf(Color.parseColor("#002EFF")));
                         rb3.setButtonTintList(ColorStateList.valueOf(Color.parseColor("#000000")));
                         break;
-                    case R.id.radioButton3: // 나쁨
+                    case R.id.rb3_d: // 나쁨
                         rb.setButtonTintList(ColorStateList.valueOf(Color.parseColor("#000000")));
                         rb2.setButtonTintList(ColorStateList.valueOf(Color.parseColor("#000000")));
                         rb3.setButtonTintList(ColorStateList.valueOf(Color.parseColor("#002EFF")));
@@ -157,7 +156,7 @@ public class Memo_daily extends AppCompatActivity {
     // 카메라 열기
     public void onCamera(View v){
         switch (v.getId()){
-            case R.id.button4:
+            case R.id.btn3_d:
                 Intent intent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
                 startActivityForResult(intent, REQ_CODE_SELECT_CAMERA);
                 break;
@@ -181,19 +180,19 @@ public class Memo_daily extends AppCompatActivity {
             if(requestCode == REQ_CODE_SELECT_CAMERA){ // 카메라 선택
                 Bundle extras = data.getExtras();
                 imageBitmap = (Bitmap) extras.get("data");
-                iv2.setImageBitmap(imageBitmap);
+                iv1_d.setImageBitmap(imageBitmap);
             }
             else if (requestCode == REQ_CODE_SELECT_IMAGE){ // 앨범 선택
                 try{
                     Bitmap bitmap1 = MediaStore.Images.Media.getBitmap(getContentResolver(), data.getData());
-                    Bitmap bitmap2 = Bitmap.createScaledBitmap(bitmap1, iv4.getWidth(), iv4.getHeight(), false);
+                    Bitmap bitmap2 = Bitmap.createScaledBitmap(bitmap1, album_iv1.getWidth(), album_iv1.getHeight(), false);
 
                     bitmap = bitmap2.copy(Bitmap.Config.ARGB_8888,true);
 
                     canvas = new Canvas(bitmap);
-                    iv4.setImageBitmap(bitmap);
+                    album_iv1.setImageBitmap(bitmap);
 
-                    iv4.setOnTouchListener(new View.OnTouchListener() { // albumdialog의 iv4 에 그림그리기
+                    album_iv1.setOnTouchListener(new View.OnTouchListener() { // albumdialog의 iv4 에 그림그리기
                         @Override
                         public boolean onTouch(View view, MotionEvent motionEvent) {
                             float x = (float) motionEvent.getX();
@@ -210,14 +209,14 @@ public class Memo_daily extends AppCompatActivity {
 
                                     path.lineTo(x, y);
                                     canvas.drawPath(path, paint);
-                                    iv4.invalidate();
+                                    album_iv1.invalidate();
                                     break;
                                 case MotionEvent.ACTION_UP:
                                     break;
                                 default:
                                     return false;
                             }
-                            iv4.invalidate();
+                            album_iv1.invalidate();
                             return true;
                         }
                     });
@@ -248,18 +247,18 @@ public class Memo_daily extends AppCompatActivity {
     // Paint 변경
     public void onChangePaint(View v) {
         switch (v.getId()) {
-            case R.id.button8: // 파랑
+            case R.id.album_btn2: // 파랑
                 color = Color.BLUE;
                 break;
-            case R.id.button9: // 가늘게
+            case R.id.album_btn3: // 가늘게
                 width -= 5F;
                 break;
-            case R.id.button10: // 원래대로
+            case R.id.album_btn4: // 원래대로
                 color = Color.RED;
                 width = 15F;
                 break;
         }
-        iv4.invalidate();
+        album_iv1.invalidate();
         paint.setColor(color);
         paint.setStyle(Paint.Style.STROKE);
         paint.setStrokeWidth(width);

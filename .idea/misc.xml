@@ -3,20 +3,16 @@
   <component name="DesignSurface">
     <option name="filePathToZoomLevelMap">
       <map>
-        <entry key="..\:/Users/82106/msd/TeamPractice/app/src/main/res/layout/activity_main_home.xml" value="0.33177083333333335" />
-        <entry key="..\:/Users/82106/msd/TeamPractice/app/src/main/res/layout/activity_map.xml" value="0.33177083333333335" />
-        <entry key="..\:/Users/82106/msd/TeamPractice/app/src/main/res/layout/activity_memo_daily.xml" value="0.33177083333333335" />
-        <entry key="..\:/Users/82106/msd/TeamPractice/app/src/main/res/layout/activity_stats.xml" value="0.33177083333333335" />
-        <entry key="..\:/Users/82106/msd/TeamPractice/app/src/main/res/layout/datedialog.xml" value="0.33177083333333335" />
-        <entry key="..\:/Users/82106/msd/TeamPractice/app/src/main/res/layout/dialog.xml" value="0.3307291666666667" />
-        <entry key="..\:/Users/82106/msd/TeamPractice/app/src/main/res/layout/item_list.xml" value="0.33489583333333334" />
         <entry key="..\:/Users/yuuuk/AndroidStudioProjects/TermProject/app/src/main/res/drawable/calendar_month.xml" value="0.1835" />
         <entry key="..\:/Users/yuuuk/AndroidStudioProjects/TermProject/app/src/main/res/drawable/camera.xml" value="0.1835" />
+        <entry key="..\:/Users/yuuuk/AndroidStudioProjects/TermProject/app/src/main/res/layout/activity_main_home.xml" value="0.175" />
         <entry key="..\:/Users/yuuuk/AndroidStudioProjects/TermProject/app/src/main/res/layout/activity_map.xml" value="0.1" />
         <entry key="..\:/Users/yuuuk/AndroidStudioProjects/TermProject/app/src/main/res/layout/activity_memo_daily.xml" value="0.1" />
         <entry key="..\:/Users/yuuuk/AndroidStudioProjects/TermProject/app/src/main/res/layout/activity_stats.xml" value="0.1" />
         <entry key="..\:/Users/yuuuk/AndroidStudioProjects/TermProject/app/src/main/res/layout/albumdialog.xml" value="0.1" />
         <entry key="..\:/Users/yuuuk/AndroidStudioProjects/TermProject/app/src/main/res/layout/datedialog.xml" value="0.1" />
+        <entry key="..\:/Users/yuuuk/AndroidStudioProjects/TermProject/app/src/main/res/layout/dialog.xml" value="0.175" />
+        <entry key="..\:/Users/yuuuk/AndroidStudioProjects/TermProject/app/src/main/res/layout/item_list.xml" value="0.175" />
       </map>
     </option>
   </component>

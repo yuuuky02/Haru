@@ -12,7 +12,7 @@
         android:orientation="vertical">
 
         <ImageView
-            android:id="@+id/imageView4"
+            android:id="@+id/album_iv1"
             android:layout_width="match_parent"
             android:layout_height="302dp"
             android:background="#FFFFFF"
@@ -21,7 +21,7 @@
     </LinearLayout>
 
     <Button
-        android:id="@+id/button7"
+        android:id="@+id/album_btn1"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:background="#ECECEC"
@@ -36,7 +36,7 @@
         android:orientation="horizontal">
 
         <Button
-            android:id="@+id/button8"
+            android:id="@+id/album_btn2"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_weight="1"
@@ -46,7 +46,7 @@
             android:textSize="16sp" />
 
         <Button
-            android:id="@+id/button9"
+            android:id="@+id/album_btn3"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginLeft="3dp"
@@ -58,7 +58,7 @@
             android:textSize="16sp" />
 
         <Button
-            android:id="@+id/button10"
+            android:id="@+id/album_btn4"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_weight="1"

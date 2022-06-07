@@ -16,8 +16,8 @@ public class Stats extends AppCompatActivity {
     private static final int MAX_YEAR = 2030;
     private static final int MIN_YEAR = 2010;
 
-    Button btn;
-    TextView tv;
+    Button btn1_s;
+    TextView tv1_s;
     View datedialog;
 
     String date;
@@ -25,15 +25,15 @@ public class Stats extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_stats);
-        btn = findViewById(R.id.button);
-        tv = findViewById(R.id.textView);
+        btn1_s = findViewById(R.id.btn1_s);
+        tv1_s = findViewById(R.id.tv1_s);
 
-        btn.setOnClickListener(new View.OnClickListener() {
+        btn1_s.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 datedialog = View.inflate(Stats.this, R.layout.datedialog, null);
-                yearPicker = datedialog.findViewById(R.id.yearPicker);
-                monthPicker = datedialog.findViewById(R.id.monthPicker);
+                yearPicker = datedialog.findViewById(R.id.yearPicker_date);
+                monthPicker = datedialog.findViewById(R.id.monthPicker_date);
                 monthPicker.setMinValue(1);
                 monthPicker.setMaxValue(12);
                 yearPicker.setMinValue(MIN_YEAR);
@@ -48,7 +48,7 @@ public class Stats extends AppCompatActivity {
                             public void onClick(DialogInterface dialogInterface, int i) {
                                 date = String.valueOf(yearPicker.getValue()) +". "
                                         + String.valueOf(monthPicker.getValue());
-                                tv.setText(date);
+                                tv1_s.setText(date);
                             }
                         })
                         .setNegativeButton("취소", null)

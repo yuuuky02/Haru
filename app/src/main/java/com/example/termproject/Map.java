@@ -8,15 +8,15 @@ import android.widget.Button;
 
 public class Map extends AppCompatActivity {
 
-    Button btn11;
+    Button map_btn1;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_map);
-        btn11 = findViewById(R.id.button11);
+        map_btn1 = findViewById(R.id.map_btn1);
 
         // 뒤로가기
-        btn11.setOnClickListener(new View.OnClickListener() {
+        map_btn1.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 setResult(RESULT_CANCELED);
