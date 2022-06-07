@@ -13,29 +13,37 @@
             android:id="@+id/rbtn_daily"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            android:layout_marginBottom="5dp"
             android:text="일상"
-            android:textSize="16dp" />
+            android:fontFamily="@font/leeseoyun"
+            android:textSize="18dp" />
 
         <RadioButton
             android:id="@+id/rbtn_exercise"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="운동"
-            android:textSize="16dp" />
+            android:fontFamily="@font/leeseoyun"
+            android:layout_marginBottom="5dp"
+            android:textSize="18dp" />
 
         <RadioButton
             android:id="@+id/rbtn_travel"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="여행"
-            android:textSize="16dp" />
+            android:fontFamily="@font/leeseoyun"
+            android:layout_marginBottom="5dp"
+            android:textSize="18dp" />
 
         <RadioButton
             android:id="@+id/rbtn_goal"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="목표"
-            android:textSize="16dp" />
+            android:fontFamily="@font/leeseoyun"
+            android:textSize="18dp" />
     </RadioGroup>
 
 </LinearLayout>
