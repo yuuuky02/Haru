@@ -37,6 +37,9 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.TermProject">
         <activity
+            android:name=".MemoStudy"
+            android:exported="false" />
+        <activity
             android:name=".Main_home"
             android:exported="true">
             <intent-filter>
