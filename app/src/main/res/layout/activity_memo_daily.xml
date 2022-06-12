@@ -13,7 +13,7 @@
         android:orientation="vertical">
 
         <LinearLayout
-            android:id="@+id/ll1_s"
+            android:id="@+id/ll1_d"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="15dp"
@@ -64,7 +64,7 @@
             android:textSize="20sp" />
 
         <LinearLayout
-            android:id="@+id/ll2_s"
+            android:id="@+id/ll2_d"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="horizontal">
@@ -109,7 +109,7 @@
         </LinearLayout>
 
         <LinearLayout
-            android:id="@+id/ll3_s"
+            android:id="@+id/ll3_d"
             android:layout_width="match_parent"
             android:layout_height="40dp"
             android:orientation="horizontal">
@@ -129,10 +129,18 @@
                 android:layout_height="match_parent"
                 android:scaleType="centerInside"
                 app:srcCompat="@drawable/outline_border" />
+
+            <TextView
+                android:id="@+id/tv3_d"
+                android:layout_width="wrap_content"
+                android:layout_height="40dp"
+                android:layout_marginLeft="10dp"
+                android:layout_weight="1"
+                android:gravity="center_vertical" />
         </LinearLayout>
 
         <LinearLayout
-            android:id="@+id/ll4_s"
+            android:id="@+id/ll4_d"
             android:layout_width="match_parent"
             android:layout_height="44dp"
             android:layout_marginTop="50dp"

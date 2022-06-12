@@ -30,14 +30,14 @@ import java.io.IOException;
 public class Memo_daily extends AppCompatActivity {
     private static final int REQ_CODE_SELECT_CAMERA = 100;
     private static final int REQ_CODE_SELECT_IMAGE = 200;
-    private static final int REQ_CODE_MEMO = 300;
+    private static final int GPS_ENABLE_REQUEST_CODE = 300;
 
     Bitmap bitmap, imageBitmap;
     Button btn1_d, btn2_d, btn3_d, btn4_d, btn5_d, album_btn1, album_btn2, album_btn3, album_btn4;
     RadioGroup rg_d;
-    RadioButton rb, rb2, rb3;
-    EditText et1;
-    TextView tv25;
+    RadioButton rb1_d, rb2_d, rb3_d;
+    EditText et1_d;
+    TextView tv2_d, tv3_d;
     ImageView iv1_d, iv2_d, album_iv1;
 
     View albumdialog;
@@ -55,7 +55,10 @@ public class Memo_daily extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_memo_daily);
         ActivityCompat.requestPermissions(this, new String[]
-                {android.Manifest.permission.CAMERA}, MODE_PRIVATE);
+                {android.Manifest.permission.CAMERA,
+                        android.Manifest.permission.ACCESS_FINE_LOCATION,
+                        android.Manifest.permission.ACCESS_COARSE_LOCATION}, MODE_PRIVATE);
+
         btn1_d = findViewById(R.id.btn1_d);
         btn2_d = findViewById(R.id.btn2_d);
         btn3_d = findViewById(R.id.btn3_d);
@@ -66,11 +69,12 @@ public class Memo_daily extends AppCompatActivity {
         album_btn3 = findViewById(R.id.album_btn3);
         album_btn4 = findViewById(R.id.album_btn4);
         rg_d = findViewById(R.id.rg_d);
-        rb = findViewById(R.id.rb1_d);
-        rb2 = findViewById(R.id.rb2_d);
-        rb3 = findViewById(R.id.rb3_d);
-        et1 = findViewById(R.id.et1_d);
-        tv25 = findViewById(R.id.tv2_d);
+        rb1_d = findViewById(R.id.rb1_d);
+        rb2_d = findViewById(R.id.rb2_d);
+        rb3_d = findViewById(R.id.rb3_d);
+        et1_d = findViewById(R.id.et1_d);
+        tv2_d = findViewById(R.id.tv2_d);
+        tv3_d = findViewById(R.id.tv3_d);
         iv1_d = findViewById(R.id.iv1_d);
         iv2_d = findViewById(R.id.iv2_d);
         album_iv1 = findViewById(R.id.album_iv1);
@@ -79,6 +83,8 @@ public class Memo_daily extends AppCompatActivity {
         btn1_d.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                Intent intent = new Intent(getApplicationContext(), Main_home.class);
+                startActivity(intent);
             }
         });
 
@@ -123,7 +129,7 @@ public class Memo_daily extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(getApplicationContext(), com.example.termproject.Map.class);
-                startActivityForResult(intent, REQ_CODE_MEMO);
+                startActivityForResult(intent, GPS_ENABLE_REQUEST_CODE);
             }
         });
 
@@ -133,19 +139,19 @@ public class Memo_daily extends AppCompatActivity {
             public void onCheckedChanged(RadioGroup group, int checkedId) {
                 switch (checkedId) {
                     case R.id.rb1_d: // 좋음
-                        rb.setButtonTintList(ColorStateList.valueOf(Color.parseColor("#002EFF")));
-                        rb2.setButtonTintList(ColorStateList.valueOf(Color.parseColor("#000000")));
-                        rb3.setButtonTintList(ColorStateList.valueOf(Color.parseColor("#000000")));
+                        rb1_d.setButtonTintList(ColorStateList.valueOf(Color.parseColor("#002EFF")));
+                        rb2_d.setButtonTintList(ColorStateList.valueOf(Color.parseColor("#000000")));
+                        rb3_d.setButtonTintList(ColorStateList.valueOf(Color.parseColor("#000000")));
                         break;
                     case R.id.rb2_d: // 중간
-                        rb.setButtonTintList(ColorStateList.valueOf(Color.parseColor("#000000")));
-                        rb2.setButtonTintList(ColorStateList.valueOf(Color.parseColor("#002EFF")));
-                        rb3.setButtonTintList(ColorStateList.valueOf(Color.parseColor("#000000")));
+                        rb1_d.setButtonTintList(ColorStateList.valueOf(Color.parseColor("#000000")));
+                        rb2_d.setButtonTintList(ColorStateList.valueOf(Color.parseColor("#002EFF")));
+                        rb3_d.setButtonTintList(ColorStateList.valueOf(Color.parseColor("#000000")));
                         break;
                     case R.id.rb3_d: // 나쁨
-                        rb.setButtonTintList(ColorStateList.valueOf(Color.parseColor("#000000")));
-                        rb2.setButtonTintList(ColorStateList.valueOf(Color.parseColor("#000000")));
-                        rb3.setButtonTintList(ColorStateList.valueOf(Color.parseColor("#002EFF")));
+                        rb1_d.setButtonTintList(ColorStateList.valueOf(Color.parseColor("#000000")));
+                        rb2_d.setButtonTintList(ColorStateList.valueOf(Color.parseColor("#000000")));
+                        rb3_d.setButtonTintList(ColorStateList.valueOf(Color.parseColor("#002EFF")));
                         break;
                 }
                 return;
@@ -177,53 +183,60 @@ public class Memo_daily extends AppCompatActivity {
     protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
         if (resultCode == RESULT_OK){
-            if(requestCode == REQ_CODE_SELECT_CAMERA){ // 카메라 선택
-                Bundle extras = data.getExtras();
-                imageBitmap = (Bitmap) extras.get("data");
-                iv1_d.setImageBitmap(imageBitmap);
-            }
-            else if (requestCode == REQ_CODE_SELECT_IMAGE){ // 앨범 선택
-                try{
-                    Bitmap bitmap1 = MediaStore.Images.Media.getBitmap(getContentResolver(), data.getData());
-                    Bitmap bitmap2 = Bitmap.createScaledBitmap(bitmap1, album_iv1.getWidth(), album_iv1.getHeight(), false);
+            switch (requestCode) {
+                case REQ_CODE_SELECT_CAMERA: // 카메라 선택
+                    Bundle extras = data.getExtras();
+                    imageBitmap = (Bitmap) extras.get("data");
+                    iv1_d.setImageBitmap(imageBitmap);
+                    break;
+                case REQ_CODE_SELECT_IMAGE:  // 앨범 선택
+                    try{
+                        Bitmap bitmap1 = MediaStore.Images.Media.getBitmap(getContentResolver(), data.getData());
+                        Bitmap bitmap2 = Bitmap.createScaledBitmap(bitmap1, album_iv1.getWidth(), album_iv1.getHeight(), false);
 
-                    bitmap = bitmap2.copy(Bitmap.Config.ARGB_8888,true);
+                        bitmap = bitmap2.copy(Bitmap.Config.ARGB_8888,true);
 
-                    canvas = new Canvas(bitmap);
-                    album_iv1.setImageBitmap(bitmap);
+                        canvas = new Canvas(bitmap);
+                        album_iv1.setImageBitmap(bitmap);
 
-                    album_iv1.setOnTouchListener(new View.OnTouchListener() { // albumdialog의 iv4 에 그림그리기
-                        @Override
-                        public boolean onTouch(View view, MotionEvent motionEvent) {
-                            float x = (float) motionEvent.getX();
-                            float y = (float) motionEvent.getY();
-                            int action = motionEvent.getAction();
-                            switch (action){
-                                case MotionEvent.ACTION_DOWN:
-                                    path.reset();
-                                    path.moveTo(x, y);
-                                    break;
-                                case MotionEvent.ACTION_MOVE:
-                                    upx = motionEvent.getX();
-                                    upy = motionEvent.getY();
+                        album_iv1.setOnTouchListener(new View.OnTouchListener() { // albumdialog의 iv4 에 그림그리기
+                            @Override
+                            public boolean onTouch(View view, MotionEvent motionEvent) {
+                                float x = (float) motionEvent.getX();
+                                float y = (float) motionEvent.getY();
+                                int action = motionEvent.getAction();
+                                switch (action){
+                                    case MotionEvent.ACTION_DOWN:
+                                        path.reset();
+                                        path.moveTo(x, y);
+                                        break;
+                                    case MotionEvent.ACTION_MOVE:
+                                        upx = motionEvent.getX();
+                                        upy = motionEvent.getY();
 
-                                    path.lineTo(x, y);
-                                    canvas.drawPath(path, paint);
-                                    album_iv1.invalidate();
-                                    break;
-                                case MotionEvent.ACTION_UP:
-                                    break;
-                                default:
-                                    return false;
+                                        path.lineTo(x, y);
+                                        canvas.drawPath(path, paint);
+                                        album_iv1.invalidate();
+                                        break;
+                                    case MotionEvent.ACTION_UP:
+                                        break;
+                                    default:
+                                        return false;
+                                }
+                                album_iv1.invalidate();
+                                return true;
                             }
-                            album_iv1.invalidate();
-                            return true;
-                        }
-                    });
-                }catch(IOException e){
-                    e.printStackTrace();
-                }
-            } else if (requestCode == REQ_CODE_MEMO){}
+                        });
+                    }catch(IOException e){
+                        e.printStackTrace();
+                    }
+                    break;
+                case GPS_ENABLE_REQUEST_CODE:
+                    if (resultCode == RESULT_OK) {
+                        tv3_d.setText(data.getStringExtra("address"));
+                    }
+                    break;
+            }
         }else {
             return;
         }
