@@ -37,9 +37,6 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.TermProject">
         <activity
-            android:name=".MemoStudy"
-            android:exported="false" />
-        <activity
             android:name=".Main_home"
             android:exported="true">
             <intent-filter>
@@ -58,7 +55,34 @@
             </intent-filter>
         </activity>
         <activity
-            android:name=".Memo_daily"
+            android:name=".MemoDaily"
+            android:exported="true">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
+        <activity
+            android:name=".MemoExercise"
+            android:exported="true">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
+        <activity
+            android:name=".MemoStudy"
+            android:exported="true">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
+        <activity
+            android:name=".MemoTrip"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -68,7 +92,9 @@
         </activity>
         <activity
             android:name=".Map"
-            android:exported="false" /> <!-- 본인 API 키 -->
+            android:exported="false" />
+
+        <!-- 본인 API 키 -->
         <!-- 유경 : AIzaSyAaaQQ78M-cxbcZse4ZaAl4-yEjcUKKAMo -->
         <meta-data
             android:name="com.google.android.maps.v2.API_KEY"

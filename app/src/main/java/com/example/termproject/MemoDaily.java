@@ -27,7 +27,7 @@ import androidx.core.app.ActivityCompat;
 
 import java.io.IOException;
 
-public class Memo_daily extends AppCompatActivity {
+public class MemoDaily extends AppCompatActivity {
     private static final int REQ_CODE_SELECT_CAMERA = 100;
     private static final int REQ_CODE_SELECT_IMAGE = 200;
     private static final int GPS_ENABLE_REQUEST_CODE = 300;
@@ -53,7 +53,7 @@ public class Memo_daily extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_memo_daily);
+        setContentView(R.layout.memo_daily);
         ActivityCompat.requestPermissions(this, new String[]
                 {android.Manifest.permission.CAMERA,
                         android.Manifest.permission.ACCESS_FINE_LOCATION,
@@ -99,10 +99,10 @@ public class Memo_daily extends AppCompatActivity {
         btn4_d.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                albumdialog = View.inflate(Memo_daily.this, R.layout.albumdialog, null);
+                albumdialog = View.inflate(MemoDaily.this, R.layout.albumdialog, null);
                 album_iv1 = albumdialog.findViewById(R.id.album_iv1);
                 album_btn1 = albumdialog.findViewById(R.id.album_btn1);
-                new AlertDialog.Builder(Memo_daily.this)
+                new AlertDialog.Builder(MemoDaily.this)
                         .setTitle("사진 선택")
                         .setIcon(R.drawable.photo)
                         .setView(albumdialog)

@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="#FFFFFF"
-    tools:context=".MemoTrip">
+    tools:context=".MemoStudy">
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -13,14 +13,14 @@
         android:orientation="vertical">
 
         <LinearLayout
-            android:id="@+id/ll1_t"
+            android:id="@+id/ll1_s"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="15dp"
             android:orientation="horizontal">
 
             <Button
-                android:id="@+id/btn1_t"
+                android:id="@+id/btn1_s"
                 android:layout_width="40dp"
                 android:layout_height="40dp"
                 android:layout_marginLeft="15dp"
@@ -28,18 +28,18 @@
                 android:backgroundTint="#000000" />
 
             <TextView
-                android:id="@+id/tv1_t"
+                android:id="@+id/tv1_s"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="2dp"
                 android:layout_weight="1"
                 android:gravity="center_horizontal"
-                android:text="여행"
+                android:text="공부"
                 android:textSize="25sp"
                 android:textStyle="bold" />
 
             <Button
-                android:id="@+id/btn2_t"
+                android:id="@+id/btn2_s"
                 android:layout_width="40dp"
                 android:layout_height="40dp"
                 android:layout_marginRight="15dp"
@@ -49,7 +49,7 @@
         </LinearLayout>
 
         <EditText
-            android:id="@+id/et1_t"
+            android:id="@+id/et1_s"
             android:layout_width="match_parent"
             android:layout_height="335dp"
             android:layout_marginTop="30dp"
@@ -64,13 +64,13 @@
             android:textSize="20sp" />
 
         <LinearLayout
-            android:id="@+id/ll2_t"
+            android:id="@+id/ll2_s"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="horizontal">
 
             <Button
-                android:id="@+id/btn3_t"
+                android:id="@+id/btn3_s"
                 android:layout_width="40dp"
                 android:layout_height="40dp"
                 android:layout_marginLeft="10dp"
@@ -81,7 +81,7 @@
                 tools:ignore="SpeakableTextPresentCheck" />
 
             <Button
-                android:id="@+id/btn4_t"
+                android:id="@+id/btn4_s"
                 android:layout_width="40dp"
                 android:layout_height="40dp"
                 android:layout_marginRight="10dp"
@@ -89,7 +89,7 @@
                 android:backgroundTint="#000000" />
 
             <Button
-                android:id="@+id/btn5_t"
+                android:id="@+id/btn5_s"
                 android:layout_width="40dp"
                 android:layout_height="40dp"
                 android:layout_marginRight="10dp"
@@ -97,7 +97,7 @@
                 android:backgroundTint="#000000" />
 
             <TextView
-                android:id="@+id/tv2_t"
+                android:id="@+id/tv2_s"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginRight="20dp"
@@ -109,13 +109,13 @@
         </LinearLayout>
 
         <LinearLayout
-            android:id="@+id/ll3_t"
+            android:id="@+id/ll3_s"
             android:layout_width="match_parent"
             android:layout_height="40dp"
             android:orientation="horizontal">
 
             <ImageView
-                android:id="@+id/iv1_t"
+                android:id="@+id/iv1_s"
                 android:layout_width="40dp"
                 android:layout_height="match_parent"
                 android:layout_marginLeft="10dp"
@@ -124,14 +124,14 @@
                 app:srcCompat="@drawable/outline_border" />
 
             <ImageView
-                android:id="@+id/iv2_t"
+                android:id="@+id/iv2_s"
                 android:layout_width="40dp"
                 android:layout_height="match_parent"
                 android:scaleType="centerInside"
                 app:srcCompat="@drawable/outline_border" />
 
             <TextView
-                android:id="@+id/tv3_t"
+                android:id="@+id/tv3_s"
                 android:layout_width="wrap_content"
                 android:layout_height="40dp"
                 android:layout_marginLeft="10dp"
@@ -140,7 +140,7 @@
         </LinearLayout>
 
         <LinearLayout
-            android:id="@+id/ll4_t"
+            android:id="@+id/ll4_s"
             android:layout_width="match_parent"
             android:layout_height="44dp"
             android:layout_marginTop="50dp"
@@ -148,21 +148,21 @@
             android:orientation="horizontal">
 
             <RadioGroup
-                android:id="@+id/rg_t"
+                android:id="@+id/rg_s"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:gravity="center_horizontal"
                 android:orientation="horizontal">
 
                 <RadioButton
-                    android:id="@+id/rb1_t"
+                    android:id="@+id/rb1_s"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_gravity="center_vertical"
                     android:button="@drawable/very_good" />
 
                 <RadioButton
-                    android:id="@+id/rb2_t"
+                    android:id="@+id/rb2_s"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_gravity="center_vertical"
@@ -171,7 +171,7 @@
                     android:button="@drawable/neutral" />
 
                 <RadioButton
-                    android:id="@+id/rb3_t"
+                    android:id="@+id/rb3_s"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_gravity="center_vertical"
