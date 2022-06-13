@@ -11,6 +11,8 @@ import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import android.os.Environment;
+import android.view.Menu;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.CalendarView;
@@ -37,6 +39,22 @@ public class Main_home extends AppCompatActivity {
     int selectYear, selectMonth, selectDay;
 
     Intent intent;
+
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        getMenuInflater().inflate(R.menu.menu1, menu);
+        return true;
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        int id = item.getItemId();
+        if (id == R.id.stats) {
+            Intent homeIntent = new Intent(this, Stats.class);
+            startActivity(homeIntent);
+        }
+        return super.onOptionsItemSelected(item);
+    }
 
 
     @Override
