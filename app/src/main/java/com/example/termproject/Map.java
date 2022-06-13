@@ -44,18 +44,28 @@ public class Map extends AppCompatActivity implements OnMapReadyCallback {
 
     private GoogleMap googleMap;
 
-    Button mapbtn1;
+    Button mapbtn1, mapbtn2;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_map);
         mapbtn1 = findViewById(R.id.mapbtn1);
+        mapbtn2 = findViewById(R.id.mapbtn2);
 
         SupportMapFragment mapFragment = (SupportMapFragment) getSupportFragmentManager().findFragmentById(R.id.map);
         mapFragment.getMapAsync(this);
 
         // 뒤로가기
         mapbtn1.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                setResult(RESULT_CANCELED);
+                finish();
+            }
+        });
+
+        // 나의 위치
+        mapbtn2.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 gpsTracker = new GpsTracker(Map.this);
