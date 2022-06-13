@@ -6,6 +6,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.app.ActivityCompat;
 
 import android.Manifest;
+import android.app.Activity;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
@@ -35,6 +36,9 @@ public class Main_home extends AppCompatActivity {
     String fileName;
     int selectYear, selectMonth, selectDay;
 
+    Intent intent;
+
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -53,6 +57,7 @@ public class Main_home extends AppCompatActivity {
         rbtn2=findViewById(R.id.rbtn_exercise);
         rbtn3=findViewById(R.id.rbtn_goal);
         rbtn4=findViewById(R.id.rbtn_travel);
+
 
         cv.setOnDateChangeListener(new CalendarView.OnDateChangeListener() {
             @Override
@@ -85,17 +90,34 @@ public class Main_home extends AppCompatActivity {
                     //파일 없는 경우 라디오버튼으로 카테고리 선택 후 해당 카테고리로 화면이동
                 }else {
                     dialogview=(View)View.inflate(Main_home.this, R.layout.dialog, null);
+                    rdg = dialogview.findViewById(R.id.radiogroup);
+                    rbtn1 = dialogview.findViewById(R.id.rbtn_daily);
+                    rdg.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
+                        @Override
+                        public void onCheckedChanged(RadioGroup radioGroup, int checkedId) {
+                            switch (checkedId) {
+                                case R.id.rbtn_daily:
+                                    intent = new Intent(getApplicationContext(), MemoDaily.class);
+                                case R.id.rbtn_exercise:
+                                    intent = new Intent(getApplicationContext(), MemoExercise.class);
+                                case R.id.rbtn_goal:
+                                    intent = new Intent(getApplicationContext(), MemoStudy.class);
+                                case R.id.rbtn_travel:
+                                    intent = new Intent(getApplicationContext(), MemoTrip.class);
+                            }
+                        }
+                    });
                     AlertDialog.Builder dlg = new AlertDialog.Builder(Main_home.this);
                     dlg.setTitle("Select Categoty");
                     dlg.setView(dialogview);
 
                     dlg.setPositiveButton("확인", new DialogInterface.OnClickListener() {
                         @Override
-                        public void onClick(DialogInterface dialogInterface, int i) {
-                            //Intent intent = new Intent(getApplicationContext(), MainActivity2.class);
-                            //startActivity(intent);
+                        public void onClick(DialogInterface dialog, int which) {
+                            startActivity(intent);
                         }
                     });
+
                     dlg.setNegativeButton("취소",null);
                     dlg.show();
                 }
