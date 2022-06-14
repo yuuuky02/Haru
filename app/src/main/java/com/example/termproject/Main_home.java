@@ -116,13 +116,18 @@ public class Main_home extends AppCompatActivity {
                             switch (checkedId) {
                                 case R.id.rbtn_daily:
                                     intent = new Intent(getApplicationContext(), MemoDaily.class);
+                                    break;
                                 case R.id.rbtn_exercise:
                                     intent = new Intent(getApplicationContext(), MemoExercise.class);
+                                    break;
                                 case R.id.rbtn_goal:
                                     intent = new Intent(getApplicationContext(), MemoStudy.class);
+                                    break;
                                 case R.id.rbtn_travel:
                                     intent = new Intent(getApplicationContext(), MemoTrip.class);
+                                    break;
                             }
+                            return;
                         }
                     });
                     AlertDialog.Builder dlg = new AlertDialog.Builder(Main_home.this);
