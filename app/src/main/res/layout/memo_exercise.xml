@@ -35,6 +35,7 @@
                 android:layout_weight="1"
                 android:gravity="center_horizontal"
                 android:text="운동"
+                android:fontFamily="@font/leeseoyun"
                 android:textSize="25sp"
                 android:textStyle="bold" />
 
@@ -56,6 +57,7 @@
             android:layout_marginBottom="20dp"
             android:background="#F1F1F1"
             android:ems="10"
+            android:fontFamily="@font/leeseoyun"
             android:gravity="top"
             android:hint="오늘은..."
             android:inputType="textPersonName"
@@ -74,6 +76,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="10dp"
                 android:text="운동시간"
+                android:fontFamily="@font/leeseoyun"
                 android:textSize="20sp" />
 
             <EditText
@@ -94,6 +97,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="10dp"
                 android:text="시간"
+                android:fontFamily="@font/leeseoyun"
                 android:textSize="20sp" />
 
         </LinearLayout>
@@ -111,6 +115,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="10dp"
                 android:text="달린거리"
+                android:fontFamily="@font/leeseoyun"
                 android:textSize="20sp" />
 
             <EditText
@@ -129,6 +134,7 @@
                 android:layout_marginLeft="10dp"
                 android:layout_weight="1"
                 android:text="km"
+                android:fontFamily="@font/leeseoyun"
                 android:textSize="20sp" />
 
         </LinearLayout>
@@ -174,6 +180,7 @@
                 android:layout_weight="1"
                 android:gravity="right"
                 android:text="선택된 날짜"
+                android:fontFamily="@font/leeseoyun"
                 android:textSize="20sp" />
 
         </LinearLayout>
@@ -215,7 +222,8 @@
             android:layout_height="44dp"
             android:layout_marginTop="50dp"
             android:gravity="center_horizontal|center_vertical"
-            android:orientation="horizontal">
+            android:orientation="horizontal"
+            android:layout_marginBottom="60dp">
 
             <RadioGroup
                 android:id="@+id/rg_e"

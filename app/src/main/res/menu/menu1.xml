@@ -4,5 +4,7 @@
         android:title="통계" />
     <item android:id="@+id/tripdata"
         android:title="여행 데이터" />
+    <item android:id="@+id/mapdata"
+        android:title="지도 데이터" />
 
 </menu>

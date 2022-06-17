@@ -37,6 +37,10 @@ public class Main_home extends AppCompatActivity {
     View dialogview;
     String fileName;
     int selectYear, selectMonth, selectDay;
+    String Mmonth;
+
+    Menu menu;
+    MenuItem stats, tripdata;
 
     Intent intent;
 
@@ -75,6 +79,8 @@ public class Main_home extends AppCompatActivity {
         rbtn2=findViewById(R.id.rbtn_exercise);
         rbtn3=findViewById(R.id.rbtn_goal);
         rbtn4=findViewById(R.id.rbtn_travel);
+        stats=findViewById(R.id.stats);
+        tripdata=findViewById(R.id.tripdata);
 
 
         cv.setOnDateChangeListener(new CalendarView.OnDateChangeListener() {
@@ -83,6 +89,13 @@ public class Main_home extends AppCompatActivity {
                 selectYear =  year;
                 selectMonth = month + 1;
                 selectDay = dayOfMonth;
+
+
+                if (selectMonth > 0 && selectMonth < 10){
+                    Mmonth = "0" + selectMonth;
+                }else{
+                    Mmonth = String.valueOf(selectMonth);
+                }
 
                 fileName = Integer.toString(selectYear) + "년"
                         + Integer.toString(selectMonth + 1) + "월"
@@ -108,6 +121,7 @@ public class Main_home extends AppCompatActivity {
                     //파일 없는 경우 라디오버튼으로 카테고리 선택 후 해당 카테고리로 화면이동
                 }else {
                     dialogview=(View)View.inflate(Main_home.this, R.layout.dialog, null);
+
                     rdg = dialogview.findViewById(R.id.radiogroup);
                     rbtn1 = dialogview.findViewById(R.id.rbtn_daily);
                     rdg.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
@@ -116,15 +130,30 @@ public class Main_home extends AppCompatActivity {
                             switch (checkedId) {
                                 case R.id.rbtn_daily:
                                     intent = new Intent(getApplicationContext(), MemoDaily.class);
+                                    intent.putExtra("select1", Integer.toString(selectYear));
+                                    intent.putExtra("select2", Mmonth);
+                                    intent.putExtra("select3", Integer.toString(selectDay));
                                     break;
+
                                 case R.id.rbtn_exercise:
                                     intent = new Intent(getApplicationContext(), MemoExercise.class);
+                                    intent.putExtra("select4", Integer.toString(selectYear));
+                                    intent.putExtra("select5", Mmonth);
+                                    intent.putExtra("select6", Integer.toString(selectDay));
                                     break;
+
                                 case R.id.rbtn_goal:
                                     intent = new Intent(getApplicationContext(), MemoStudy.class);
+                                    intent.putExtra("select7", Integer.toString(selectYear));
+                                    intent.putExtra("select8", Mmonth);
+                                    intent.putExtra("select9", Integer.toString(selectDay));
                                     break;
+
                                 case R.id.rbtn_travel:
                                     intent = new Intent(getApplicationContext(), MemoTrip.class);
+                                    intent.putExtra("select10", Integer.toString(selectYear));
+                                    intent.putExtra("select11", Mmonth);
+                                    intent.putExtra("select12", Integer.toString(selectDay));
                                     break;
                             }
                             return;
@@ -133,6 +162,7 @@ public class Main_home extends AppCompatActivity {
                     AlertDialog.Builder dlg = new AlertDialog.Builder(Main_home.this);
                     dlg.setTitle("Select Categoty");
                     dlg.setView(dialogview);
+
 
                     dlg.setPositiveButton("확인", new DialogInterface.OnClickListener() {
                         @Override
@@ -147,4 +177,6 @@ public class Main_home extends AppCompatActivity {
             }
         });
     }
+
+
 }
