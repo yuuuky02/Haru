@@ -1,9 +1,13 @@
 package com.example.termproject;
 
 import android.app.AlertDialog;
+import android.content.ContentValues;
+import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.res.ColorStateList;
+import android.database.sqlite.SQLiteDatabase;
+import android.database.sqlite.SQLiteOpenHelper;
 import android.graphics.Bitmap;
 import android.graphics.Canvas;
 import android.graphics.Color;
@@ -25,9 +29,16 @@ import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.app.ActivityCompat;
 
+import java.io.ByteArrayOutputStream;
 import java.io.IOException;
 
 public class MemoExercise extends AppCompatActivity {
+
+    MemoDBHelper memoHelper;
+    SQLiteDatabase sqlDB;
+    String emotion;
+    byte[] byteArrayCamera, byteArrayAlbum;
+
     private static final int REQ_CODE_SELECT_CAMERA = 100;
     private static final int REQ_CODE_SELECT_IMAGE = 200;
     private static final int GPS_ENABLE_REQUEST_CODE = 300;
@@ -36,8 +47,8 @@ public class MemoExercise extends AppCompatActivity {
     Button btn1_e, btn2_e, btn3_e, btn4_e, btn5_e, album_btn1, album_btn2, album_btn3, album_btn4;
     RadioGroup rg_e;
     RadioButton rb1_e, rb2_e, rb3_e;
-    EditText et1_e;
-    TextView tv2_e, tv3_e;
+    EditText et1_e, et2_e, et3_e;
+    TextView tv1_e, tv2_e, tv3_e;
     ImageView iv1_e, iv2_e, album_iv1;
 
     View albumdialog;
@@ -73,6 +84,9 @@ public class MemoExercise extends AppCompatActivity {
         rb2_e = findViewById(R.id.rb2_e);
         rb3_e = findViewById(R.id.rb3_e);
         et1_e = findViewById(R.id.et1_e);
+        et2_e = findViewById(R.id.et2_e);
+        et3_e = findViewById(R.id.et3_e);
+        tv1_e = findViewById(R.id.tv1_e);
         tv2_e = findViewById(R.id.tv2_e);
         tv3_e = findViewById(R.id.tv3_e);
         iv1_e = findViewById(R.id.iv1_e);
@@ -88,10 +102,29 @@ public class MemoExercise extends AppCompatActivity {
             }
         });
 
+        memoHelper = new MemoDBHelper(this);
         // 저장하기
         btn2_e.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                ContentValues row, exerciserow;
+                sqlDB = memoHelper.getWritableDatabase();
+                row = new ContentValues();
+                exerciserow = new ContentValues();
+                row.put("date", tv2_e.getText().toString()); // 날짜
+                row.put("category", tv1_e.getText().toString()); // 카테고리
+                row.put("content", et1_e.getText().toString()); // 메모내용
+                row.put("camera", byteArrayCamera); // 카메라 사진
+                row.put("album", byteArrayAlbum); // 앨범 사진
+                row.put("address", tv3_e.getText().toString()); // 주소
+                row.put("emotion", emotion); // 감정
+                exerciserow.put("date", tv2_e.getText().toString());     // 날짜
+                exerciserow.put("etime", Integer.valueOf(et2_e.getText().toString())); // 운동시간
+                exerciserow.put("edistance", Integer.valueOf(et3_e.getText().toString())); // 달린거리
+                sqlDB.insert("memo", null, row);
+                sqlDB.insert("exercise", null, exerciserow);
+                memoHelper.close();
+                Toast.makeText(getApplicationContext(), "저장되었습니다.", Toast.LENGTH_SHORT).show();
             }
         });
 
@@ -111,6 +144,11 @@ public class MemoExercise extends AppCompatActivity {
                             public void onClick(DialogInterface dialogInterface, int i) {
                                 iv1_e.setImageBitmap(imageBitmap); // 카메라 사진
                                 iv2_e.setImageBitmap(bitmap); // 앨범 사진
+
+                                ByteArrayOutputStream albumStream = new ByteArrayOutputStream();
+                                bitmap.compress(Bitmap.CompressFormat.JPEG, 100, albumStream);
+                                byteArrayAlbum = albumStream.toByteArray();
+
                                 Toast.makeText(getApplicationContext(), "사진을 선택했습니다.", Toast.LENGTH_SHORT).show();
                             }
                         })
@@ -142,16 +180,19 @@ public class MemoExercise extends AppCompatActivity {
                         rb1_e.setButtonTintList(ColorStateList.valueOf(Color.parseColor("#002EFF")));
                         rb2_e.setButtonTintList(ColorStateList.valueOf(Color.parseColor("#000000")));
                         rb3_e.setButtonTintList(ColorStateList.valueOf(Color.parseColor("#000000")));
+                        emotion = rb1_e.getText().toString();
                         break;
                     case R.id.rb2_e: // 중간
                         rb1_e.setButtonTintList(ColorStateList.valueOf(Color.parseColor("#000000")));
                         rb2_e.setButtonTintList(ColorStateList.valueOf(Color.parseColor("#002EFF")));
                         rb3_e.setButtonTintList(ColorStateList.valueOf(Color.parseColor("#000000")));
+                        emotion = rb2_e.getText().toString();
                         break;
                     case R.id.rb3_e: // 나쁨
                         rb1_e.setButtonTintList(ColorStateList.valueOf(Color.parseColor("#000000")));
                         rb2_e.setButtonTintList(ColorStateList.valueOf(Color.parseColor("#000000")));
                         rb3_e.setButtonTintList(ColorStateList.valueOf(Color.parseColor("#002EFF")));
+                        emotion = rb3_e.getText().toString();
                         break;
                 }
                 return;
@@ -188,6 +229,10 @@ public class MemoExercise extends AppCompatActivity {
                     Bundle extras = data.getExtras();
                     imageBitmap = (Bitmap) extras.get("data");
                     iv1_e.setImageBitmap(imageBitmap);
+
+                    ByteArrayOutputStream cameraStream = new ByteArrayOutputStream();
+                    imageBitmap.compress(Bitmap.CompressFormat.JPEG, 100, cameraStream);
+                    byteArrayCamera = cameraStream.toByteArray();
                     break;
                 case REQ_CODE_SELECT_IMAGE:  // 앨범 선택
                     try{
@@ -276,5 +321,30 @@ public class MemoExercise extends AppCompatActivity {
         paint.setStyle(Paint.Style.STROKE);
         paint.setStrokeWidth(width);
         return;
+    }
+
+    class MemoDBHelper extends SQLiteOpenHelper {
+
+        public MemoDBHelper(Context context) {
+            super(context, "memo.db", null, 1);
+            // TODO Auto-generated constructor stub
+        }
+
+        @Override
+        public void onCreate(SQLiteDatabase db) {
+            // TODO Auto-generated method stub
+            db.execSQL("CREATE TABLE memo (id INTEGER PRIMARY KEY AUTOINCREMENT, date TEXT, category TEXT, content TEXT," +
+                    "address TEXT, camera TEXT, album TEXT, emotion TEXT);");
+
+            db.execSQL("CREATE TABLE exercise (id INTEGER PRIMARY KEY AUTOINCREMENT, date TEXT, etime INTEGER, edistance INTEGER);");
+        }
+
+        @Override
+        public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion) {
+            // TODO Auto-generated method stub
+            db.execSQL("DROP TABLE IF EXISTS memo");
+            db.execSQL("DROP TABLE IF EXISTS exercise");
+            onCreate(db);
+        }
     }
 }

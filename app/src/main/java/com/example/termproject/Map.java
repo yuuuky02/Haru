@@ -165,7 +165,6 @@ public class Map extends AppCompatActivity implements OnMapReadyCallback {
                 case GPS_ENABLE_REQUEST_CODE:
                     if (checkLocationServicesStatus()) {
                         if (checkLocationServicesStatus()) {
-
                             Log.d("@@@", "onActivityResult : GPS 활성화 되있음");
                             return;
                         }

@@ -1,14 +1,19 @@
 package com.example.termproject;
 
 import android.app.AlertDialog;
+import android.content.ContentValues;
+import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.res.ColorStateList;
+import android.database.sqlite.SQLiteDatabase;
+import android.database.sqlite.SQLiteOpenHelper;
 import android.graphics.Bitmap;
 import android.graphics.Canvas;
 import android.graphics.Color;
 import android.graphics.Paint;
 import android.graphics.Path;
+import android.net.Uri;
 import android.os.Bundle;
 import android.provider.MediaStore;
 import android.view.MotionEvent;
@@ -25,9 +30,16 @@ import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.app.ActivityCompat;
 
+import java.io.ByteArrayOutputStream;
 import java.io.IOException;
 
 public class MemoDaily extends AppCompatActivity {
+
+    MemoDBHelper memoHelper;
+    SQLiteDatabase sqlDB;
+    String emotion;
+    byte[] byteArrayCamera, byteArrayAlbum;
+
     private static final int REQ_CODE_SELECT_CAMERA = 100;
     private static final int REQ_CODE_SELECT_IMAGE = 200;
     private static final int GPS_ENABLE_REQUEST_CODE = 300;
@@ -37,7 +49,7 @@ public class MemoDaily extends AppCompatActivity {
     RadioGroup rg_d;
     RadioButton rb1_d, rb2_d, rb3_d;
     EditText et1_d;
-    TextView tv2_d, tv3_d;
+    TextView tv1_d, tv2_d, tv3_d;
     ImageView iv1_d, iv2_d, album_iv1;
 
     View albumdialog;
@@ -73,6 +85,7 @@ public class MemoDaily extends AppCompatActivity {
         rb2_d = findViewById(R.id.rb2_d);
         rb3_d = findViewById(R.id.rb3_d);
         et1_d = findViewById(R.id.et1_d);
+        tv1_d = findViewById(R.id.tv1_d);
         tv2_d = findViewById(R.id.tv2_d);
         tv3_d = findViewById(R.id.tv3_d);
         iv1_d = findViewById(R.id.iv1_d);
@@ -88,10 +101,24 @@ public class MemoDaily extends AppCompatActivity {
             }
         });
 
+        memoHelper = new MemoDBHelper(this);
         // 저장하기
         btn2_d.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                ContentValues row;
+                sqlDB = memoHelper.getWritableDatabase();
+                row = new ContentValues();
+                row.put("date", tv2_d.getText().toString());     // 날짜
+                row.put("category", tv1_d.getText().toString()); // 카테고리
+                row.put("content", et1_d.getText().toString());  // 메모내용
+                row.put("camera", byteArrayCamera);             // 카메라 사진
+                row.put("album", byteArrayAlbum);               // 앨범 사진
+                row.put("address", tv3_d.getText().toString()); // 주소
+                row.put("emotion", emotion);                    // 감정
+                sqlDB.insert("memo", null, row);
+                memoHelper.close();
+                Toast.makeText(getApplicationContext(), "저장되었습니다.", Toast.LENGTH_SHORT).show();
             }
         });
 
@@ -111,6 +138,11 @@ public class MemoDaily extends AppCompatActivity {
                             public void onClick(DialogInterface dialogInterface, int i) {
                                 iv1_d.setImageBitmap(imageBitmap); // 카메라 사진
                                 iv2_d.setImageBitmap(bitmap); // 앨범 사진
+
+                                ByteArrayOutputStream albumStream = new ByteArrayOutputStream();
+                                bitmap.compress(Bitmap.CompressFormat.JPEG, 100, albumStream);
+                                byteArrayAlbum = albumStream.toByteArray();
+
                                 Toast.makeText(getApplicationContext(), "사진을 선택했습니다.", Toast.LENGTH_SHORT).show();
                             }
                         })
@@ -142,16 +174,19 @@ public class MemoDaily extends AppCompatActivity {
                         rb1_d.setButtonTintList(ColorStateList.valueOf(Color.parseColor("#002EFF")));
                         rb2_d.setButtonTintList(ColorStateList.valueOf(Color.parseColor("#000000")));
                         rb3_d.setButtonTintList(ColorStateList.valueOf(Color.parseColor("#000000")));
+                        emotion = rb1_d.getText().toString();
                         break;
                     case R.id.rb2_d: // 중간
                         rb1_d.setButtonTintList(ColorStateList.valueOf(Color.parseColor("#000000")));
                         rb2_d.setButtonTintList(ColorStateList.valueOf(Color.parseColor("#002EFF")));
                         rb3_d.setButtonTintList(ColorStateList.valueOf(Color.parseColor("#000000")));
+                        emotion = rb2_d.getText().toString();
                         break;
                     case R.id.rb3_d: // 나쁨
                         rb1_d.setButtonTintList(ColorStateList.valueOf(Color.parseColor("#000000")));
                         rb2_d.setButtonTintList(ColorStateList.valueOf(Color.parseColor("#000000")));
                         rb3_d.setButtonTintList(ColorStateList.valueOf(Color.parseColor("#002EFF")));
+                        emotion = rb3_d.getText().toString();
                         break;
                 }
                 return;
@@ -188,6 +223,10 @@ public class MemoDaily extends AppCompatActivity {
                     Bundle extras = data.getExtras();
                     imageBitmap = (Bitmap) extras.get("data");
                     iv1_d.setImageBitmap(imageBitmap);
+
+                    ByteArrayOutputStream cameraStream = new ByteArrayOutputStream();
+                    imageBitmap.compress(Bitmap.CompressFormat.JPEG, 100, cameraStream);
+                    byteArrayCamera = cameraStream.toByteArray();
                     break;
                 case REQ_CODE_SELECT_IMAGE:  // 앨범 선택
                     try{
@@ -276,5 +315,28 @@ public class MemoDaily extends AppCompatActivity {
         paint.setStyle(Paint.Style.STROKE);
         paint.setStrokeWidth(width);
         return;
+    }
+
+    class MemoDBHelper extends SQLiteOpenHelper {
+
+        public MemoDBHelper(Context context) {
+            super(context, "memo.db", null, 1);
+            // TODO Auto-generated constructor stub
+        }
+
+        @Override
+        public void onCreate(SQLiteDatabase db) {
+            // TODO Auto-generated method stub
+            db.execSQL("CREATE TABLE memo (id INTEGER PRIMARY KEY AUTOINCREMENT, date TEXT, category TEXT, content TEXT," +
+                    "address TEXT, camera TEXT, album TEXT, emotion TEXT);");
+        }
+
+        @Override
+        public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion) {
+            // TODO Auto-generated method stub
+            db.execSQL("DROP TABLE IF EXISTS memo");
+            onCreate(db);
+
+        }
     }
 }

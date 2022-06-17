@@ -226,26 +226,32 @@
 
                 <RadioButton
                     android:id="@+id/rb1_e"
-                    android:layout_width="wrap_content"
+                    android:layout_width="40dp"
                     android:layout_height="wrap_content"
                     android:layout_gravity="center_vertical"
-                    android:button="@drawable/very_good" />
+                    android:button="@drawable/very_good"
+                    android:text="매우 좋음"
+                    android:textColor="#FFFFFF" />
 
                 <RadioButton
                     android:id="@+id/rb2_e"
-                    android:layout_width="wrap_content"
+                    android:layout_width="40dp"
                     android:layout_height="wrap_content"
                     android:layout_gravity="center_vertical"
                     android:layout_marginLeft="80dp"
                     android:layout_marginRight="80dp"
-                    android:button="@drawable/neutral" />
+                    android:button="@drawable/neutral"
+                    android:text="중간"
+                    android:textColor="#FFFFFF" />
 
                 <RadioButton
                     android:id="@+id/rb3_e"
-                    android:layout_width="wrap_content"
+                    android:layout_width="40dp"
                     android:layout_height="wrap_content"
                     android:layout_gravity="center_vertical"
-                    android:button="@drawable/very_bad" />
+                    android:button="@drawable/very_bad"
+                    android:text="매우 나쁨"
+                    android:textColor="#FFFFFF" />
 
             </RadioGroup>
         </LinearLayout>
