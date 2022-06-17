@@ -315,27 +315,4 @@ public class MemoStudy extends AppCompatActivity {
         paint.setStrokeWidth(width);
         return;
     }
-
-    class MemoDBHelper extends SQLiteOpenHelper {
-
-        public MemoDBHelper(Context context) {
-            super(context, "memo.db", null, 1);
-            // TODO Auto-generated constructor stub
-        }
-
-        @Override
-        public void onCreate(SQLiteDatabase db) {
-            // TODO Auto-generated method stub
-            db.execSQL("CREATE TABLE memo (id INTEGER PRIMARY KEY AUTOINCREMENT, date TEXT, category TEXT, content TEXT," +
-                    "address TEXT, camera TEXT, album TEXT, emotion TEXT);");
-        }
-
-        @Override
-        public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion) {
-            // TODO Auto-generated method stub
-            db.execSQL("DROP TABLE IF EXISTS memo");
-            onCreate(db);
-
-        }
-    }
 }
