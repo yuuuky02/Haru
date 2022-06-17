@@ -27,6 +27,7 @@
             android:layout_gravity="center_vertical"
             android:gravity="center"
             android:text="공부"
+            android:fontFamily="@font/leeseoyun"
             android:textSize="20sp" />
 
         <Button
@@ -48,7 +49,8 @@
         android:layout_marginBottom="10dp"
         android:background="#FFFFFF"
         android:ems="10"
-        android:hint="메모내용"
+        android:hint="오늘은.."
+        android:fontFamily="@font/leeseoyun"
         android:inputType="textPersonName"
         android:textSize="18sp"
         tools:layout_editor_absoluteX="205dp"

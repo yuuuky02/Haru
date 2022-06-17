@@ -27,6 +27,7 @@
         android:background="#ECECEC"
         android:onClick="onOpenAlbum"
         android:text="사진 선택"
+        android:fontFamily="@font/leeseoyun"
         android:textSize="18sp" />
 
     <LinearLayout
@@ -43,6 +44,7 @@
             android:background="#ECECEC"
             android:onClick="onChangePaint"
             android:text="파랑"
+            android:fontFamily="@font/leeseoyun"
             android:textSize="16sp" />
 
         <Button
@@ -55,6 +57,7 @@
             android:background="#ECECEC"
             android:onClick="onChangePaint"
             android:text="가늘게"
+            android:fontFamily="@font/leeseoyun"
             android:textSize="16sp" />
 
         <Button
@@ -65,6 +68,7 @@
             android:background="#ECECEC"
             android:onClick="onChangePaint"
             android:text="원래대로"
+            android:fontFamily="@font/leeseoyun"
             android:textSize="16sp" />
 
     </LinearLayout>

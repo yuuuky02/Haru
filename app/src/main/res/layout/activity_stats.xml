@@ -18,6 +18,7 @@
             android:layout_marginTop="15dp"
             android:gravity="center_horizontal"
             android:text="날짜 선택"
+            android:fontFamily="@font/leeseoyun"
             android:textSize="25sp"
             android:textStyle="bold" />
 
@@ -48,6 +49,7 @@
             android:gravity="center_vertical"
             android:paddingLeft="15dp"
             android:text="기록 횟수"
+            android:fontFamily="@font/leeseoyun"
             android:textSize="23sp" />
 
         <LinearLayout
@@ -65,6 +67,7 @@
                 android:gravity="right"
                 android:paddingRight="20dp"
                 android:text="일상"
+                android:fontFamily="@font/leeseoyun"
                 android:textSize="20sp" />
 
             <TextView
@@ -74,6 +77,7 @@
                 android:layout_weight="1"
                 android:paddingLeft="20dp"
                 android:text="0 회"
+                android:fontFamily="@font/leeseoyun"
                 android:textSize="20sp" />
         </LinearLayout>
 
@@ -92,6 +96,7 @@
                 android:gravity="right"
                 android:paddingRight="20dp"
                 android:text="운동"
+                android:fontFamily="@font/leeseoyun"
                 android:textSize="20sp" />
 
             <TextView
@@ -101,6 +106,7 @@
                 android:layout_weight="1"
                 android:paddingLeft="20dp"
                 android:text="0 회"
+                android:fontFamily="@font/leeseoyun"
                 android:textSize="20sp" />
         </LinearLayout>
 
@@ -119,6 +125,7 @@
                 android:gravity="right"
                 android:paddingRight="20dp"
                 android:text="목표"
+                android:fontFamily="@font/leeseoyun"
                 android:textSize="20sp" />
 
             <TextView
@@ -128,6 +135,7 @@
                 android:layout_weight="1"
                 android:paddingLeft="20dp"
                 android:text="0 회"
+                android:fontFamily="@font/leeseoyun"
                 android:textSize="20sp" />
         </LinearLayout>
 
@@ -145,6 +153,7 @@
                 android:gravity="center|right"
                 android:paddingRight="20dp"
                 android:text="여행"
+                android:fontFamily="@font/leeseoyun"
                 android:textSize="20sp" />
 
             <TextView
@@ -154,6 +163,7 @@
                 android:layout_weight="1"
                 android:paddingLeft="20dp"
                 android:text="0 회"
+                android:fontFamily="@font/leeseoyun"
                 android:textSize="20sp" />
         </LinearLayout>
 
@@ -167,6 +177,7 @@
             android:gravity="center_vertical"
             android:paddingLeft="15dp"
             android:text="감정 횟수"
+            android:fontFamily="@font/leeseoyun"
             android:textSize="23sp" />
 
         <LinearLayout
@@ -192,6 +203,7 @@
                 android:paddingLeft="20dp"
                 android:paddingTop="5dp"
                 android:text="0 회"
+                android:fontFamily="@font/leeseoyun"
                 android:textSize="20sp" />
 
         </LinearLayout>
@@ -219,6 +231,7 @@
                 android:paddingLeft="20dp"
                 android:paddingTop="5dp"
                 android:text="0 회"
+                android:fontFamily="@font/leeseoyun"
                 android:textSize="20sp" />
 
         </LinearLayout>
@@ -245,6 +258,7 @@
                 android:paddingLeft="20dp"
                 android:paddingTop="5dp"
                 android:text="0 회"
+                android:fontFamily="@font/leeseoyun"
                 android:textSize="20sp" />
 
         </LinearLayout>
@@ -259,6 +273,7 @@
             android:gravity="center_vertical"
             android:paddingLeft="15dp"
             android:text="운동"
+            android:fontFamily="@font/leeseoyun"
             android:textSize="23sp" />
 
         <LinearLayout
@@ -276,6 +291,7 @@
                 android:gravity="right"
                 android:paddingRight="20dp"
                 android:text="총 운동시간"
+                android:fontFamily="@font/leeseoyun"
                 android:textSize="20sp" />
 
             <TextView
@@ -285,6 +301,7 @@
                 android:layout_weight="1"
                 android:paddingLeft="20dp"
                 android:text="0 분"
+                android:fontFamily="@font/leeseoyun"
                 android:textSize="20sp" />
         </LinearLayout>
 
@@ -303,6 +320,7 @@
                 android:gravity="right"
                 android:paddingRight="20dp"
                 android:text="총 달린거리"
+                android:fontFamily="@font/leeseoyun"
                 android:textSize="20sp" />
 
             <TextView
@@ -312,6 +330,7 @@
                 android:layout_weight="1"
                 android:paddingLeft="20dp"
                 android:text="0 km"
+                android:fontFamily="@font/leeseoyun"
                 android:textSize="20sp" />
         </LinearLayout>
 
