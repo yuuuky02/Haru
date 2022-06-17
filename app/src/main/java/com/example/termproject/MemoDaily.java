@@ -19,6 +19,7 @@ import android.provider.MediaStore;
 import android.view.MotionEvent;
 import android.view.View;
 import android.widget.Button;
+import android.widget.CalendarView;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.RadioButton;
@@ -26,6 +27,7 @@ import android.widget.RadioGroup;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.app.ActivityCompat;
@@ -51,6 +53,12 @@ public class MemoDaily extends AppCompatActivity {
     EditText et1_d;
     TextView tv1_d, tv2_d, tv3_d;
     ImageView iv1_d, iv2_d, album_iv1;
+
+    Intent intent;
+    int select1, select2, select3;
+
+    CalendarView calendarView;
+    int selectYear, selectMonth, selectDay;
 
     View albumdialog;
     Canvas canvas;
@@ -91,6 +99,8 @@ public class MemoDaily extends AppCompatActivity {
         iv1_d = findViewById(R.id.iv1_d);
         iv2_d = findViewById(R.id.iv2_d);
         album_iv1 = findViewById(R.id.album_iv1);
+        calendarView = findViewById(R.id.calendarView);
+
 
         // close
         btn1_d.setOnClickListener(new View.OnClickListener() {
@@ -192,6 +202,15 @@ public class MemoDaily extends AppCompatActivity {
                 return;
             }
         });
+
+        //캘린더날짜
+        intent=getIntent();
+        select1 = Integer.parseInt(intent.getStringExtra("select1"));
+        select2 = Integer.parseInt(intent.getStringExtra("select2"));
+        select3 = Integer.parseInt(intent.getStringExtra("select3"));
+        tv2_d.setText(select1+"년"+select2+"월"+select3+"일");
+
+
     }
 
     // 카메라 열기

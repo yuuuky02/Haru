@@ -56,6 +56,9 @@ public class MemoExercise extends AppCompatActivity {
     Paint paint;
     Path path;
 
+    Intent intent;
+    int select4, select5, select6;
+
     String mode = "none";
     float upx = 0, upy = 0;
     static float width = 15F;
@@ -198,6 +201,13 @@ public class MemoExercise extends AppCompatActivity {
                 return;
             }
         });
+
+        //캘린더날짜
+        intent=getIntent();
+        select4 = Integer.parseInt(intent.getStringExtra("select4"));
+        select5 = Integer.parseInt(intent.getStringExtra("select5"));
+        select6 = Integer.parseInt(intent.getStringExtra("select6"));
+        tv2_e.setText(select4+"년"+select5+"월"+select6+"일");
     }
 
     // 카메라 열기

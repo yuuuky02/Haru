@@ -56,6 +56,9 @@ public class MemoTrip extends AppCompatActivity {
     Paint paint;
     Path path;
 
+    Intent intent;
+    int select10, select11, select12;
+
     String mode = "none";
     float upx = 0, upy = 0;
     static float width = 15F;
@@ -191,6 +194,13 @@ public class MemoTrip extends AppCompatActivity {
                 return;
             }
         });
+
+        //캘린더날짜
+        intent=getIntent();
+        select10 = Integer.parseInt(intent.getStringExtra("select10"));
+        select11 = Integer.parseInt(intent.getStringExtra("select11"));
+        select12 = Integer.parseInt(intent.getStringExtra("select12"));
+        tv2_t.setText(select10+"년"+select11+"월"+select12+"일");
     }
 
     // 카메라 열기

@@ -56,6 +56,9 @@ public class MemoStudy extends AppCompatActivity {
     Paint paint;
     Path path;
 
+    Intent intent;
+    int select7, select8, select9;
+
     String mode = "none";
     float upx = 0, upy = 0;
     static float width = 15F;
@@ -191,6 +194,13 @@ public class MemoStudy extends AppCompatActivity {
                 return;
             }
         });
+
+        //캘린더날짜
+        intent=getIntent();
+        select7 = Integer.parseInt(intent.getStringExtra("select7"));
+        select8 = Integer.parseInt(intent.getStringExtra("select8"));
+        select9 = Integer.parseInt(intent.getStringExtra("select9"));
+        tv2_s.setText(select7+"년"+select8+"월"+select9+"일");
     }
 
     // 카메라 열기

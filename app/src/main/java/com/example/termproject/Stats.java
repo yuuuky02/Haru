@@ -1,8 +1,8 @@
 package com.example.termproject;
 
+import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 
-import android.app.AlertDialog;
 import android.content.DialogInterface;
 import android.os.Bundle;
 import android.view.View;
@@ -12,6 +12,7 @@ import android.widget.TextView;
 
 public class Stats extends AppCompatActivity {
 
+    private int count = 0;
     NumberPicker yearPicker, monthPicker;
     private static final int MAX_YEAR = 2030;
     private static final int MIN_YEAR = 2010;
@@ -25,6 +26,7 @@ public class Stats extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_stats);
+/*<<<<<<< Updated upstream*/
         btn1_s = findViewById(R.id.btn1_s);
         tv1_s = findViewById(R.id.tv1_s);
 
@@ -46,14 +48,20 @@ public class Stats extends AppCompatActivity {
                         .setPositiveButton("확인", new DialogInterface.OnClickListener() {
                             @Override
                             public void onClick(DialogInterface dialogInterface, int i) {
-                                date = String.valueOf(yearPicker.getValue()) +". "
+                                date = String.valueOf(yearPicker.getValue()) + ". "
                                         + String.valueOf(monthPicker.getValue());
                                 tv1_s.setText(date);
                             }
                         })
                         .setNegativeButton("취소", null)
                         .show();
+                /*=======*/
+
+        /*btn = findViewById(R.id.button);
+        tv = findViewById(R.id.textView);*/
+
+
             }
-        });
-    }
+});
+}
 }
