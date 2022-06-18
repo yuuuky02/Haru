@@ -208,9 +208,6 @@ public class MemoDaily extends AppCompatActivity {
 
         //캘린더날짜
         intent=getIntent();
-//        select1 = Integer.parseInt(intent.getStringExtra("select1"));
-//        select2 = Integer.parseInt(intent.getStringExtra("select2"));
-//        select3 = Integer.parseInt(intent.getStringExtra("select3"));
         select1 = intent.getStringExtra("select1");
         select2 = intent.getStringExtra("select2");
         select3 = intent.getStringExtra("select3");
