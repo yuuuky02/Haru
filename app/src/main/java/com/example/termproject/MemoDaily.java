@@ -67,7 +67,6 @@ public class MemoDaily extends AppCompatActivity {
     Canvas canvas;
     Paint paint;
     Path path;
-
     String mode = "none";
     float upx = 0, upy = 0;
     static float width = 15F;
@@ -132,6 +131,8 @@ public class MemoDaily extends AppCompatActivity {
                 sqlDB.insert("memo", null, row);
                 memoHelper.close();
                 Toast.makeText(getApplicationContext(), "저장되었습니다.", Toast.LENGTH_SHORT).show();
+                Intent intent = new Intent(getApplicationContext(), Main_home.class);
+                startActivity(intent);
             }
         });
 
@@ -205,6 +206,7 @@ public class MemoDaily extends AppCompatActivity {
                 return;
             }
         });
+
 
         //캘린더날짜
         intent=getIntent();

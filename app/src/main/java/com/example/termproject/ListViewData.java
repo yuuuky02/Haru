@@ -11,6 +11,8 @@ public class ListViewData {
     private byte[]  camera;
     private byte[]  album;
     private String emotion;
+    private int etime;
+    private int edistance;
 
     public void setId(int id){this.id = id;}
     public void setDate(String date){this.date = date;}
@@ -20,6 +22,8 @@ public class ListViewData {
     public void setCamera(byte[] camera){this.camera = camera;}
     public void setAlbum(byte[]  album){this.album = album;}
     public void setEmotion(String emotion){this.emotion = emotion;}
+    public void setEtime(int etime){this.etime = etime;}
+    public void setEdistance(int edistance){this.edistance = edistance;}
 
     public int getId(){return this.id;}
     public String getDate(){return this.date;}
@@ -29,4 +33,6 @@ public class ListViewData {
     public byte[]  getCamera(){return this.camera;}
     public byte[]  getAlbum(){return this.album;}
     public String getEmotion(){return this.emotion;}
+    public int getEtime(){return this.etime;}
+    public int getEdistance(){return this.edistance;}
 }

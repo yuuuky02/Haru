@@ -110,10 +110,9 @@ public class MemoExercise extends AppCompatActivity {
         btn2_e.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                ContentValues row, exerciserow;
+                ContentValues row;
                 sqlDB = memoHelper.getWritableDatabase();
                 row = new ContentValues();
-                exerciserow = new ContentValues();
                 row.put("date", tv2_e.getText().toString()); // 날짜
                 row.put("category", tv1_e.getText().toString()); // 카테고리
                 row.put("content", et1_e.getText().toString()); // 메모내용
@@ -121,13 +120,14 @@ public class MemoExercise extends AppCompatActivity {
                 row.put("album", byteArrayAlbum); // 앨범 사진
                 row.put("address", tv3_e.getText().toString()); // 주소
                 row.put("emotion", emotion); // 감정
-                exerciserow.put("date", tv2_e.getText().toString());     // 날짜
-                exerciserow.put("etime", Integer.valueOf(et2_e.getText().toString())); // 운동시간
-                exerciserow.put("edistance", Integer.valueOf(et3_e.getText().toString())); // 달린거리
+                row.put("date", tv2_e.getText().toString());     // 날짜
+                row.put("etime", Integer.valueOf(et2_e.getText().toString())); // 운동시간
+                row.put("edistance", Integer.valueOf(et3_e.getText().toString())); // 달린거리
                 sqlDB.insert("memo", null, row);
-                sqlDB.insert("exercise", null, exerciserow);
                 memoHelper.close();
                 Toast.makeText(getApplicationContext(), "저장되었습니다.", Toast.LENGTH_SHORT).show();
+                Intent intent = new Intent(getApplicationContext(), Main_home.class);
+                startActivity(intent);
             }
         });
 

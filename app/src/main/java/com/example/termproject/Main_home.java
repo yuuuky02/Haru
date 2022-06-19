@@ -178,7 +178,7 @@ public class Main_home extends AppCompatActivity {
         while(cursor.moveToNext()) {
             adapter.addItemToList(cursor.getInt(0), cursor.getString(1), cursor.getString(2),
                     cursor.getString(3), cursor.getString(4), cursor.getBlob(5),
-                    cursor.getBlob(6), cursor.getString(7));
+                    cursor.getBlob(6), cursor.getString(7), cursor.getInt(8), cursor.getInt(9));
         }
         listView.setAdapter(adapter);
     }

@@ -12,14 +12,14 @@
         android:orientation="vertical">
 
         <LinearLayout
-            android:id="@+id/ll1_ml"
+            android:id="@+id/ll1_mle"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="15dp"
             android:orientation="horizontal">
 
             <TextView
-                android:id="@+id/tv1_ml"
+                android:id="@+id/tv1_mle"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="2dp"
@@ -33,7 +33,7 @@
         </LinearLayout>
 
         <EditText
-            android:id="@+id/et1_ml"
+            android:id="@+id/et1_mle"
             android:layout_width="match_parent"
             android:layout_height="285dp"
             android:layout_marginTop="30dp"
@@ -49,13 +49,13 @@
             android:textSize="20sp" />
 
         <LinearLayout
-            android:id="@+id/ll2_ml"
+            android:id="@+id/ll2_mle"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="horizontal">
 
             <Button
-                android:id="@+id/btn3_ml"
+                android:id="@+id/btn3_mle"
                 android:layout_width="40dp"
                 android:layout_height="40dp"
                 android:layout_marginLeft="10dp"
@@ -66,25 +66,23 @@
                 tools:ignore="SpeakableTextPresentCheck" />
 
             <Button
-                android:id="@+id/btn4_ml"
+                android:id="@+id/btn4_mle"
                 android:layout_width="40dp"
                 android:layout_height="40dp"
                 android:layout_marginRight="10dp"
                 android:background="@drawable/photo"
-                android:backgroundTint="#000000"
-                android:onClick="onAlbum" />
+                android:backgroundTint="#000000" />
 
             <Button
-                android:id="@+id/btn5_ml"
+                android:id="@+id/btn5_mle"
                 android:layout_width="40dp"
                 android:layout_height="40dp"
                 android:layout_marginRight="10dp"
                 android:background="@drawable/location"
-                android:backgroundTint="#000000"
-                android:onClick="onlocation" />
+                android:backgroundTint="#000000" />
 
             <TextView
-                android:id="@+id/tv2_ml"
+                android:id="@+id/tv2_mle"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginRight="20dp"
@@ -97,13 +95,13 @@
         </LinearLayout>
 
         <LinearLayout
-            android:id="@+id/ll3_ml"
+            android:id="@+id/ll3_mle"
             android:layout_width="match_parent"
             android:layout_height="40dp"
             android:orientation="horizontal">
 
             <ImageView
-                android:id="@+id/iv1_ml"
+                android:id="@+id/iv1_mle"
                 android:layout_width="40dp"
                 android:layout_height="match_parent"
                 android:layout_marginLeft="10dp"
@@ -112,14 +110,14 @@
                 app:srcCompat="@drawable/outline_border" />
 
             <ImageView
-                android:id="@+id/iv2_ml"
+                android:id="@+id/iv2_mle"
                 android:layout_width="40dp"
                 android:layout_height="match_parent"
                 android:scaleType="centerInside"
                 app:srcCompat="@drawable/outline_border" />
 
             <TextView
-                android:id="@+id/tv3_ml"
+                android:id="@+id/tv3_mle"
                 android:layout_width="wrap_content"
                 android:layout_height="40dp"
                 android:layout_marginLeft="10dp"
@@ -128,7 +126,7 @@
         </LinearLayout>
 
         <LinearLayout
-            android:id="@+id/ll4_ml"
+            android:id="@+id/ll4_mle"
             android:layout_width="match_parent"
             android:layout_height="44dp"
             android:layout_marginTop="50dp"
@@ -137,14 +135,14 @@
             android:layout_marginBottom="60dp">
 
             <RadioGroup
-                android:id="@+id/rg_ml"
+                android:id="@+id/rg_mle"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:gravity="center_horizontal"
                 android:orientation="horizontal">
 
                 <RadioButton
-                    android:id="@+id/rb1_ml"
+                    android:id="@+id/rb1_mle"
                     android:layout_width="40dp"
                     android:layout_height="wrap_content"
                     android:layout_gravity="center_vertical"
@@ -153,7 +151,7 @@
                     android:textColor="#FFFFFF" />
 
                 <RadioButton
-                    android:id="@+id/rb2_ml"
+                    android:id="@+id/rb2_mle"
                     android:layout_width="40dp"
                     android:layout_height="wrap_content"
                     android:layout_gravity="center_vertical"
@@ -165,7 +163,7 @@
                     android:textColor="#FFFFFF" />
 
                 <RadioButton
-                    android:id="@+id/rb3_ml"
+                    android:id="@+id/rb3_mle"
                     android:layout_width="40dp"
                     android:layout_height="wrap_content"
                     android:layout_gravity="center_vertical"

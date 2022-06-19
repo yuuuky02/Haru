@@ -15,16 +15,13 @@ public class MemoDBHelper extends SQLiteOpenHelper {
     public void onCreate(SQLiteDatabase db) {
         // TODO Auto-generated method stub
         db.execSQL("CREATE TABLE memo (id INTEGER PRIMARY KEY AUTOINCREMENT, date TEXT, category TEXT, content TEXT," +
-                "address TEXT, camera TEXT, album TEXT, emotion TEXT);");
-
-        db.execSQL("CREATE TABLE exercise (id INTEGER PRIMARY KEY AUTOINCREMENT, date TEXT, etime INTEGER, edistance INTEGER);");
+                "address TEXT, camera TEXT, album TEXT, emotion TEXT, etime INTEGER, edistance INTEGER);");
     }
 
     @Override
     public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion) {
         // TODO Auto-generated method stub
         db.execSQL("DROP TABLE IF EXISTS memo");
-        db.execSQL("DROP TABLE IF EXISTS exercise");
         onCreate(db);
     }
 }

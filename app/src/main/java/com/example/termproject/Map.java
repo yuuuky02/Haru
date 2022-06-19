@@ -88,10 +88,10 @@ public class Map extends AppCompatActivity implements OnMapReadyCallback {
     @Override
     public void onMapReady(@NonNull GoogleMap googleMap) {
         this.googleMap = googleMap;
-        LatLng latLng = new LatLng(37.557667, 126.926546);
+        LatLng latLng = new LatLng(37.351756, 126.742844);
         googleMap.moveCamera(CameraUpdateFactory.newLatLng(latLng));
         googleMap.moveCamera(CameraUpdateFactory.zoomTo(15));
-        MarkerOptions markerOptions = new MarkerOptions().position(latLng).title("홍대입구역");
+        MarkerOptions markerOptions = new MarkerOptions().position(latLng).title("정왕역");
         googleMap.addMarker(markerOptions);
 
         if (ContextCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION)
