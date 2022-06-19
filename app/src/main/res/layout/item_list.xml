@@ -45,22 +45,20 @@
                         android:layout_weight="1"
                         android:paddingLeft="15dp"
                         android:paddingTop="10dp"
-                        android:text="주소"
+                        android:text="내용"
                         android:textSize="16sp" />
 
-                    <ImageView
-                        android:id="@+id/iv1_list"
-                        android:layout_width="40dp"
-                        android:layout_height="40dp"
-                        app:srcCompat="@drawable/outline_border" />
-
-                    <ImageView
-                        android:id="@+id/iv2_list"
-                        android:layout_width="40dp"
-                        android:layout_height="40dp"
-                        android:layout_marginRight="10dp"
-                        app:srcCompat="@drawable/outline_border" />
                 </LinearLayout>
+
+                <TextView
+                    android:id="@+id/tvlist3"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="15dp"
+                    android:paddingLeft="15dp"
+                    android:paddingTop="5dp"
+                    android:text="주소"
+                    android:textSize="16sp" />
 
             </LinearLayout>
 
@@ -75,7 +73,7 @@
                     android:id="@+id/btn1_list"
                     android:layout_width="70dp"
                     android:layout_height="35dp"
-                    android:layout_marginTop="10dp"
+                    android:layout_marginTop="20dp"
                     android:background="#DFDEDE"
                     android:text="수정"
                     android:textSize="16sp" />

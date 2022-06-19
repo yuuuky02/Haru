@@ -35,8 +35,8 @@
         android:requestLegacyExternalStorage="true"
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
-        android:usesCleartextTraffic="true"
-        android:theme="@style/Theme.TermProject">
+        android:theme="@style/Theme.TermProject"
+        android:usesCleartextTraffic="true">
         <activity
             android:name=".Main_home"
             android:exported="true">
@@ -93,9 +93,7 @@
         </activity>
         <activity
             android:name=".Map"
-            android:exported="false" />
-
-        <!-- 본인 API 키 -->
+            android:exported="false" /> <!-- 본인 API 키 -->
         <!-- 유경 : AIzaSyAaaQQ78M-cxbcZse4ZaAl4-yEjcUKKAMo -->
         <meta-data
             android:name="com.google.android.maps.v2.API_KEY"

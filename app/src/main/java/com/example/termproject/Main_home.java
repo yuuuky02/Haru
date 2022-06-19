@@ -1,6 +1,7 @@
 package com.example.termproject;
 
 import androidx.annotation.NonNull;
+import androidx.annotation.RequiresApi;
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.app.ActivityCompat;
@@ -16,22 +17,29 @@ import android.database.SQLException;
 import android.database.sqlite.SQLiteDatabase;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
+import android.os.Build;
 import android.os.Bundle;
 import android.os.Environment;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.MotionEvent;
 import android.view.VerifiedMotionEvent;
 import android.view.View;
+import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.CalendarView;
+import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
 import android.widget.SimpleCursorAdapter;
+import android.widget.SlidingDrawer;
 import android.widget.TextView;
+import android.widget.Toast;
 
+import java.io.ByteArrayOutputStream;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.IOException;
@@ -86,6 +94,7 @@ public class Main_home extends AppCompatActivity {
         btn2_list = findViewById(R.id.btn2_list);
 
         cv.setOnDateChangeListener(new CalendarView.OnDateChangeListener() {
+            @RequiresApi(api = Build.VERSION_CODES.O)
             @Override
             public void onSelectedDayChange(@NonNull CalendarView calendarView, int year, int month, int dayOfMonth) {
                 selectYear = year;
@@ -108,7 +117,20 @@ public class Main_home extends AppCompatActivity {
                 if (Integer.valueOf(result) == 0) {
                     onCategory();
                 }else{ // 있으면 '리스트뷰' 뜨기
-                    displayList();
+                    new android.app.AlertDialog.Builder(Main_home.this)
+                            .setPositiveButton("작성하기", new DialogInterface.OnClickListener() {
+                                @Override
+                                public void onClick(DialogInterface dialogInterface, int i) {
+                                    onCategory();
+                                }
+                            })
+                            .setNeutralButton("기록보기", new DialogInterface.OnClickListener() {
+                                @Override
+                                public void onClick(DialogInterface dialog, int which) {
+                                    displayList();
+                                }
+                            })
+                            .show();
                 }
 
 //                fileName = Integer.toString(selectYear) + "년"
@@ -124,14 +146,9 @@ public class Main_home extends AppCompatActivity {
 //                        byte[] txt = new byte[infile.available()];
 //                        infile.read(txt);
 //                        String str = new String(txt);
-//
-//                        //리스트뷰
-//
-//
 //                    } catch (IOException e){
 //                        e.printStackTrace();;
 //                    }
-//
 //                    //파일 없는 경우 라디오버튼으로 카테고리 선택 후 해당 카테고리로 화면이동
 //                }else {
             }
@@ -155,6 +172,7 @@ public class Main_home extends AppCompatActivity {
     }
 
     // '리스트뷰'
+    @RequiresApi(api = Build.VERSION_CODES.O)
     void displayList() {
         MemoDBHelper memoHelper = new MemoDBHelper(this);
         SQLiteDatabase db = memoHelper.getReadableDatabase();
@@ -162,8 +180,8 @@ public class Main_home extends AppCompatActivity {
         ListViewAdapter adapter = new ListViewAdapter();
         while(cursor.moveToNext()) {
             adapter.addItemToList(cursor.getInt(0), cursor.getString(1), cursor.getString(2),
-                    cursor.getString(3), cursor.getString(4), cursor.getString(5),
-                    cursor.getString(6), cursor.getString(7));
+                    cursor.getString(3), cursor.getString(4), cursor.getBlob(5),
+                    cursor.getBlob(6), cursor.getString(7));
         }
         listView.setAdapter(adapter);
     }
