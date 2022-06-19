@@ -60,6 +60,8 @@ public class MemoDaily extends AppCompatActivity {
     Intent intent;
     String select1, select2, select3;
 
+    String address;
+
     CalendarView calendarView;
     int selectYear, selectMonth, selectDay;
 
@@ -175,6 +177,10 @@ public class MemoDaily extends AppCompatActivity {
             public void onClick(View v) {
                 Intent intent = new Intent(getApplicationContext(), com.example.termproject.Map.class);
                 startActivityForResult(intent, GPS_ENABLE_REQUEST_CODE);
+
+                intent=getIntent();
+                address=intent.getStringExtra("address");
+                tv3_d.setText(address);
             }
         });
 
