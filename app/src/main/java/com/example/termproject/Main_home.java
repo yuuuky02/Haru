@@ -63,6 +63,7 @@ public class Main_home extends AppCompatActivity {
     String fileName;
     int selectYear, selectMonth, selectDay;
     String Mmonth;
+    String category = null;
 
     Menu menu;
     MenuItem stats, tripdata;
@@ -83,10 +84,6 @@ public class Main_home extends AppCompatActivity {
         tv1 = findViewById(R.id.tv_calendar);
         cv = findViewById(R.id.calendarView);
         rdg = findViewById(R.id.radiogroup);
-        rbtn1 = findViewById(R.id.rbtn_daily);
-        rbtn2 = findViewById(R.id.rbtn_exercise);
-        rbtn3 = findViewById(R.id.rbtn_goal);
-        rbtn4 = findViewById(R.id.rbtn_travel);
         stats = findViewById(R.id.stats);
         tripdata = findViewById(R.id.tripdata);
         listView = (ListView) findViewById(R.id.listView1_main);
@@ -191,6 +188,9 @@ public class Main_home extends AppCompatActivity {
         dialogview=(View)View.inflate(Main_home.this, R.layout.dialog, null);
         rdg = dialogview.findViewById(R.id.radiogroup);
         rbtn1 = dialogview.findViewById(R.id.rbtn_daily);
+        rbtn2 = dialogview.findViewById(R.id.rbtn_exercise);
+        rbtn3 = dialogview.findViewById(R.id.rbtn_goal);
+        rbtn4 = dialogview.findViewById(R.id.rbtn_travel);
         rdg.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
             @Override
             public void onCheckedChanged(RadioGroup radioGroup, int checkedId) {
@@ -200,6 +200,7 @@ public class Main_home extends AppCompatActivity {
                         intent.putExtra("select1", Integer.toString(selectYear));
                         intent.putExtra("select2", Mmonth);
                         intent.putExtra("select3", Integer.toString(selectDay));
+                        category = rbtn1.getText().toString();
                         break;
 
                     case R.id.rbtn_exercise:
@@ -207,6 +208,7 @@ public class Main_home extends AppCompatActivity {
                         intent.putExtra("select4", Integer.toString(selectYear));
                         intent.putExtra("select5", Mmonth);
                         intent.putExtra("select6", Integer.toString(selectDay));
+                        category = rbtn2.getText().toString();
                         break;
 
                     case R.id.rbtn_goal:
@@ -214,6 +216,7 @@ public class Main_home extends AppCompatActivity {
                         intent.putExtra("select7", Integer.toString(selectYear));
                         intent.putExtra("select8", Mmonth);
                         intent.putExtra("select9", Integer.toString(selectDay));
+                        category = rbtn3.getText().toString();
                         break;
 
                     case R.id.rbtn_travel:
@@ -221,24 +224,35 @@ public class Main_home extends AppCompatActivity {
                         intent.putExtra("select10", Integer.toString(selectYear));
                         intent.putExtra("select11", Mmonth);
                         intent.putExtra("select12", Integer.toString(selectDay));
+                        category = rbtn4.getText().toString();
                         break;
                 }
                 return;
             }
         });
-        AlertDialog.Builder dlg = new AlertDialog.Builder(Main_home.this);
-        dlg.setTitle("Select Categoty");
-        dlg.setView(dialogview);
-
-
-        dlg.setPositiveButton("확인", new DialogInterface.OnClickListener() {
-            @Override
-            public void onClick(DialogInterface dialog, int which) {
-                startActivity(intent);
-            }
-        });
-
-        dlg.setNegativeButton("취소",null);
-        dlg.show();
+        new android.app.AlertDialog.Builder(Main_home.this)
+                .setTitle("Select Categoty")
+                .setView(dialogview)
+                .setPositiveButton("확인", new DialogInterface.OnClickListener() {
+                    @RequiresApi(api = Build.VERSION_CODES.O)
+                    @Override
+                    public void onClick(DialogInterface dialogInterface, int i) {
+                        SQLiteDatabase db = memoHelper.getReadableDatabase();
+                        String result2 = null;
+                        Cursor cursor2;
+                        cursor2 = db.rawQuery("SELECT count(id) FROM memo WHERE date=? AND category=?", new String[]{selectDate,category});
+                        while(cursor2.moveToNext()){
+                            result2 = cursor2.getString(0);
+                        }
+                        if (Integer.valueOf(result2) > 0) {
+                            Toast.makeText(getApplicationContext(), "기록한 내용이 있습니다.", Toast.LENGTH_SHORT).show();
+                            displayList();
+                        }else {
+                            startActivity(intent);
+                        }
+                    }
+                })
+                .setNegativeButton("취소", null)
+                .show();
     }
 }
