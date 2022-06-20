@@ -75,7 +75,7 @@
                     android:layout_height="35dp"
                     android:layout_marginTop="20dp"
                     android:background="#DFDEDE"
-                    android:text="수정"
+                    android:text="보기"
                     android:textSize="16sp" />
 
                 <Button

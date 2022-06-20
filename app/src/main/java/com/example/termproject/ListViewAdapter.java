@@ -69,10 +69,12 @@ public class ListViewAdapter extends BaseAdapter {
     Button btn1_list, btn2_list;
     TextView tv1_ml, tv2_ml, tv3_ml;
     EditText et1_ml;
-    ImageView iv1_ml, iv2_ml;
+    ImageView iv1_ml, iv2_ml, iv1_pv;
     RadioGroup rg_ml; RadioButton rb1_ml, rb2_ml, rb3_ml;
     Button btn3_ml, btn4_ml, btn5_ml;
     String emotion;
+    View photoview;
+    Bitmap cameraBitmap, albumBitmap;
 
     TextView tvlist1, tvlist2, tvlist3;
     Button btn1_list, btn2_list;
@@ -171,6 +173,7 @@ public class ListViewAdapter extends BaseAdapter {
                         return;
                     }
                 });
+<<<<<<< HEAD
 
 <<<<<<< Updated upstream
                 btn3_ml.setOnClickListener(new View.OnClickListener() {
@@ -182,8 +185,10 @@ public class ListViewAdapter extends BaseAdapter {
                 });
 =======
 >>>>>>> Stashed changes
+=======
+>>>>>>> main
                 // 카메라 사진 받기
-                Bitmap cameraBitmap = null;
+                cameraBitmap = null;
                 byte[] cameraByte = listdata.getCamera();
                 if(cameraByte!=null) {
                     cameraBitmap = BitmapFactory.decodeByteArray(cameraByte, 0, cameraByte.length);
@@ -192,14 +197,43 @@ public class ListViewAdapter extends BaseAdapter {
                     iv1_ml.setImageBitmap(null);
                 }
                 // 앨범 사진 받기
-                Bitmap albumBitmap = null;
+                albumBitmap = null;
                 byte[] albumByte = listdata.getAlbum();
                 if(albumByte!=null) {
                     albumBitmap = BitmapFactory.decodeByteArray(albumByte, 0, albumByte.length);
                     iv2_ml.setImageBitmap(albumBitmap);
-                }else{
+                }else {
                     iv2_ml.setImageBitmap(null);
                 }
+
+                iv1_ml.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        photoview = View.inflate(context, R.layout.photoview, null);
+                        iv1_pv = photoview.findViewById(R.id.iv1_pv);
+                        iv1_pv.setImageBitmap(cameraBitmap);
+                        new AlertDialog.Builder(context)
+                                .setTitle("사진 보기")
+                                .setIcon(R.drawable.photo)
+                                .setView(photoview)
+                                .setPositiveButton("확인", null)
+                                .show();
+                    }
+                });
+                iv2_ml.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        photoview = View.inflate(context, R.layout.photoview, null);
+                        iv1_pv = photoview.findViewById(R.id.iv1_pv);
+                        iv1_pv.setImageBitmap(albumBitmap);
+                        new AlertDialog.Builder(context)
+                                .setTitle("사진 보기")
+                                .setIcon(R.drawable.photo)
+                                .setView(photoview)
+                                .setPositiveButton("확인", null)
+                                .show();
+                    }
+                });
 
                 new AlertDialog.Builder(context)
                         .setView(memolistdialog)
