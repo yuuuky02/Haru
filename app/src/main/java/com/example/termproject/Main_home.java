@@ -66,7 +66,7 @@ public class Main_home extends AppCompatActivity {
     String category = null;
 
     Menu menu;
-    MenuItem stats, tripdata, mapdata;
+    MenuItem stats, cafedata, mapdata;
 
     Intent intent;
 
@@ -81,16 +81,12 @@ public class Main_home extends AppCompatActivity {
                         android.Manifest.permission.ACCESS_COARSE_LOCATION}, MODE_PRIVATE);
         memoHelper = new MemoDBHelper(this);
 
-//        ActivityCompat.requestPermissions(this, new String[] {Manifest.permission.WRITE_EXTERNAL_STORAGE},MODE_PRIVATE);
-//        final String sdPath = Environment.getExternalStorageDirectory().getAbsolutePath();
-//        final File dir = new File(sdPath + "Pictures");
-//        dir.mkdir();
-
         tv1 = findViewById(R.id.tv_calendar);
         cv = findViewById(R.id.calendarView);
         rdg = findViewById(R.id.radiogroup);
         stats = findViewById(R.id.stats);
-        tripdata = findViewById(R.id.tripdata);
+        cafedata = findViewById(R.id.cafedata);
+        mapdata = findViewById(R.id.mapdata);
         listView = (ListView) findViewById(R.id.listView1_main);
         btn1_list = findViewById(R.id.btn1_list);
         btn2_list = findViewById(R.id.btn2_list);
@@ -147,25 +143,6 @@ public class Main_home extends AppCompatActivity {
                             })
                             .show();
                 }
-
-//                fileName = Integer.toString(selectYear) + "년"
-//                        + Integer.toString(selectMonth + 1) + "월"
-//                        + Integer.toString(selectDay) + "일";
-//                String Path =sdPath+"/Pictures/"+fileName;
-//                File files = new File(Path);
-//
-//                //파일 있으면 리스트뷰로 띄우기 각각 다른 경로에서 가져와야함 픽쳐스 폴더에 아예 다 저장해버리는 것도 되긴함 파일 내용은 달라야함
-//                if (files.exists()) {
-//                    try {
-//                        FileInputStream infile =new FileInputStream(Path);
-//                        byte[] txt = new byte[infile.available()];
-//                        infile.read(txt);
-//                        String str = new String(txt);
-//                    } catch (IOException e){
-//                        e.printStackTrace();;
-//                    }
-//                    //파일 없는 경우 라디오버튼으로 카테고리 선택 후 해당 카테고리로 화면이동
-//                }else {
             }
         });
     }
@@ -184,10 +161,15 @@ public class Main_home extends AppCompatActivity {
                 intent = new Intent(getApplicationContext(), Stats.class);
                 startActivity(intent);
                 return true;
+            case R.id.cafedata:
+                intent = new Intent(getApplicationContext(), Cmaps.class);
+                startActivity(intent);
+                return true;
             case R.id.mapdata:
                 intent = new Intent(getApplicationContext(), Map.class);
                 startActivity(intent);
                 return true;
+
         }
         return false;
     }

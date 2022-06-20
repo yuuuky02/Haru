@@ -66,8 +66,10 @@ public class Map extends AppCompatActivity implements OnMapReadyCallback {
     SQLiteDatabase sqlDB;
     MemoDBHelper memoHelper;
     String d_name;
-    int d_latitude;
-    int d_longitude;
+    Double d_latitude;
+    Double d_longitude;
+    List<MarkerData> mlist;
+    MarkerOptions markerOptions;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -107,6 +109,26 @@ public class Map extends AppCompatActivity implements OnMapReadyCallback {
                 finish();
             }
         });
+
+        try {
+            mlist = new ArrayList();
+            MemoDBHelper memoHelper = new MemoDBHelper(this);
+            SQLiteDatabase db = memoHelper.getReadableDatabase();
+            Cursor cursor = db.rawQuery("SELECT * FROM marker", null);
+            if (cursor != null){
+                while (cursor.moveToNext()) {
+                    MarkerData markerData = new MarkerData();
+                    markerData.setId(cursor.getInt(0));
+                    markerData.setName(cursor.getString(1));
+                    markerData.setLatitude(cursor.getString(2));
+                    markerData.setLongitude(cursor.getString(3));
+
+                    mlist.add(markerData);
+                }
+            }
+        }catch (SQLException mSQLException){
+            throw mSQLException;
+        }
     }
 
 
@@ -120,31 +142,14 @@ public class Map extends AppCompatActivity implements OnMapReadyCallback {
         LatLng latLng = new LatLng(37.351756, 126.742844);
         googleMap.moveCamera(CameraUpdateFactory.newLatLng(latLng));
         googleMap.moveCamera(CameraUpdateFactory.zoomTo(15));
-        MarkerOptions markerOptions = new MarkerOptions().position(latLng).title("정왕역");
+        markerOptions = new MarkerOptions().position(latLng).title("정왕역");
         googleMap.addMarker(markerOptions);
 
         if (ContextCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION)
                 == PackageManager.PERMISSION_GRANTED){
             googleMap.setMyLocationEnabled(true);
         }
-
         memoHelper= new MemoDBHelper(this);
-
-        //조회
-        sqlDB = memoHelper.getReadableDatabase();
-        Cursor cursor;
-        cursor = sqlDB.rawQuery("SELECT name FROM marker", null);
-
-        if (cursor.moveToNext()) {
-            d_name = cursor.getString(0);
-
-            markerOptions.position(new LatLng(d_latitude, d_longitude));
-            markerOptions.title(d_name);
-            googleMap.addMarker(markerOptions);
-
-        }
-        memoHelper.close();
-
 
         //맵 터치 시 마커생성
         googleMap.setOnMapClickListener(new GoogleMap.OnMapClickListener() {
@@ -154,34 +159,46 @@ public class Map extends AppCompatActivity implements OnMapReadyCallback {
                 Double latitude = point.latitude; //위도
                 Double longitude = point.longitude;  //경도
                 markerOptions.position(new LatLng(latitude, longitude));
-
-                AlertDialog.Builder dlg2 = new AlertDialog.Builder(Map.this);
-                dlg2.setTitle("마커 이름을 입력하세요.");
-                dlg2.setView(dialogview);
-                dlg2.setPositiveButton("확인", new DialogInterface.OnClickListener() {
-                    @Override
-                    public void onClick(DialogInterface dialogInterface, int i) {
-                        ContentValues row;
-                        sqlDB = memoHelper.getWritableDatabase();
-                        row = new ContentValues();
-                        row.put("name", edt_md.getText().toString());
-                        row.put("latitude", latitude);
-                        row.put("longitude", longitude);
-                        sqlDB.insert("marker", null, row);
-                        memoHelper.close();
-                        Toast.makeText(getApplicationContext(), "마커가 저장되었습니다.", Toast.LENGTH_SHORT).show();
-                        googleMap.addMarker(markerOptions);
-                    }
-                });
-                dlg2.setNegativeButton("취소", null);
-                dlg2.show();
-
+                new AlertDialog.Builder(Map.this)
+                        .setTitle("마커 이름을 입력하세요.")
+                        .setView(dialogview)
+                        .setPositiveButton("확인", new DialogInterface.OnClickListener() {
+                            @Override
+                            public void onClick(DialogInterface dialogInterface, int i) {
+                                ViewGroup dialogParentView = (ViewGroup) dialogview.getParent();
+                                ContentValues row;
+                                sqlDB = memoHelper.getWritableDatabase();
+                                row = new ContentValues();
+                                row.put("name", edt_md.getText().toString());
+                                row.put("latitude", latitude.toString());
+                                row.put("longitude", longitude.toString());
+                                sqlDB.insert("marker", null, row);
+                                memoHelper.close();
+                                Toast.makeText(getApplicationContext(), "마커가 저장되었습니다.", Toast.LENGTH_SHORT).show();
+                                googleMap.addMarker(markerOptions);
+                                dialogParentView.removeView(dialogview);
+                            }
+                        })
+                        .setNegativeButton("취소", null)
+                        .show();
             }
         });
+
+        for(int i=0; i<mlist.size();i++) {
+            String d_name = mlist.get(i).name;
+            Double d_latitude = Double.valueOf(mlist.get(i).latitude);
+            Double d_longitude = Double.valueOf(mlist.get(i).longitude);
+
+            LatLng latLng2 = new LatLng(d_latitude, d_longitude);
+            googleMap.moveCamera(CameraUpdateFactory.newLatLng(latLng2));
+            googleMap.moveCamera(CameraUpdateFactory.zoomTo(15));
+            markerOptions = new MarkerOptions().position(latLng2).title(d_name);
+            googleMap.addMarker(markerOptions);
+        }
     }
 
+    // 권한 요청
     public static final int MY_PERMISSIONS_REQUEST_LOCATION = 99;
-
     @Override
     public void onRequestPermissionsResult(int permsRequestCode,
                                            @NonNull String[] permissions,
@@ -203,14 +220,11 @@ public class Map extends AppCompatActivity implements OnMapReadyCallback {
         }
     }
 
+    // 현재 위치 받기
     public String getCurrentAddress( double latitude, double longitude) {
-
         Geocoder geocoder = new Geocoder(this, Locale.getDefault());
-
         List<Address> addresses;
-
         try {
-
             addresses = geocoder.getFromLocation(
                     latitude,
                     longitude,
@@ -218,17 +232,15 @@ public class Map extends AppCompatActivity implements OnMapReadyCallback {
         } catch (IOException ioException) {
             return "사용불가";
         }
-
         if (addresses == null || addresses.size() == 0) {
             Toast.makeText(this, "주소 미발견", Toast.LENGTH_LONG).show();
             return "주소 미발견";
         }
-
         Address address = addresses.get(0);
         return address.getAddressLine(0).toString()+"\n";
-
     }
 
+    // 서비스 권한 체크
     public boolean checkLocationServicesStatus() {
         LocationManager locationManager = (LocationManager) getSystemService(LOCATION_SERVICE);
 
