@@ -114,8 +114,10 @@ public class Map extends AppCompatActivity implements OnMapReadyCallback {
     public void onMapReady(@NonNull GoogleMap googleMap) {
         this.googleMap = googleMap;
 
+
         dialogview=(View)View.inflate(Map.this, R.layout.map_dialog, null);
         edt_md=dialogview.findViewById(R.id.edt_md);
+
 
         LatLng latLng = new LatLng(37.351756, 126.742844);
         googleMap.moveCamera(CameraUpdateFactory.newLatLng(latLng));

@@ -70,7 +70,8 @@
                 android:layout_height="40dp"
                 android:layout_marginRight="10dp"
                 android:background="@drawable/photo"
-                android:backgroundTint="#000000" />
+                android:backgroundTint="#000000"
+                android:onClick="onAlbum" />
 
             <Button
                 android:id="@+id/btn5_ml"
@@ -78,7 +79,8 @@
                 android:layout_height="40dp"
                 android:layout_marginRight="10dp"
                 android:background="@drawable/location"
-                android:backgroundTint="#000000" />
+                android:backgroundTint="#000000"
+                android:onClick="onlocation" />
 
             <TextView
                 android:id="@+id/tv2_ml"

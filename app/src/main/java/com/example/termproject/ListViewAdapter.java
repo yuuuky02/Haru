@@ -2,8 +2,11 @@ package com.example.termproject;
 
 import static android.app.Activity.RESULT_OK;
 
+<<<<<<< Updated upstream
 import static androidx.core.app.ActivityCompat.startActivityForResult;
 
+=======
+>>>>>>> Stashed changes
 import android.app.AlertDialog;
 import android.content.ContentValues;
 import android.content.Context;
@@ -62,6 +65,15 @@ public class ListViewAdapter extends BaseAdapter {
     public long getItemId(int i) {
         return i;
     }
+    TextView tvlist1, tvlist2, tvlist3;
+    Button btn1_list, btn2_list;
+    TextView tv1_ml, tv2_ml, tv3_ml;
+    EditText et1_ml;
+    ImageView iv1_ml, iv2_ml;
+    RadioGroup rg_ml; RadioButton rb1_ml, rb2_ml, rb3_ml;
+    Button btn3_ml, btn4_ml, btn5_ml;
+    String emotion;
+
     TextView tvlist1, tvlist2, tvlist3;
     Button btn1_list, btn2_list;
     TextView tv1_ml, tv2_ml, tv3_ml;
@@ -160,6 +172,7 @@ public class ListViewAdapter extends BaseAdapter {
                     }
                 });
 
+<<<<<<< Updated upstream
                 btn3_ml.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
@@ -167,6 +180,8 @@ public class ListViewAdapter extends BaseAdapter {
                         context.startActivity(intent);
                     }
                 });
+=======
+>>>>>>> Stashed changes
                 // 카메라 사진 받기
                 Bitmap cameraBitmap = null;
                 byte[] cameraByte = listdata.getCamera();

@@ -117,7 +117,10 @@ public class Stats extends AppCompatActivity {
                                 }
 
                                 // 운동_운동시간 월별 합계
+<<<<<<< Updated upstream
 
+=======
+>>>>>>> Stashed changes
                                 cursor = db.rawQuery("SELECT sum(etime) FROM memo WHERE substr(date,1,8)=? and category=?",
                                         new String[]{tv1_st.getText().toString(), "운동"});
                                 if (cursor.moveToNext()) {
