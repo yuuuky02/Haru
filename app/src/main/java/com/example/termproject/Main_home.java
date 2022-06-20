@@ -66,7 +66,7 @@ public class Main_home extends AppCompatActivity {
     String category = null;
 
     Menu menu;
-    MenuItem stats, tripdata;
+    MenuItem stats, tripdata, mapdata;
 
     Intent intent;
 
@@ -104,7 +104,7 @@ public class Main_home extends AppCompatActivity {
                 }
                 selectDate = selectYear+"년"+Mmonth+"월"+selectDay+"일";
 
-                // 해당 날짜게 기록된게 없으면 '카테고리' 뜨기,
+                // 해당 날짜에 기록된게 없으면 '카테고리' 뜨기,
                 SQLiteDatabase db = memoHelper.getReadableDatabase();
                 Cursor cursor1 = db.rawQuery("SELECT count(id) FROM memo WHERE date=?", new String[]{selectDate});
                 String result = null;
@@ -161,11 +161,17 @@ public class Main_home extends AppCompatActivity {
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         int id = item.getItemId();
-        if (id == R.id.stats) {
-            Intent homeIntent = new Intent(this, Stats.class);
-            startActivity(homeIntent);
+        switch (id) {
+            case R.id.stats:
+                intent = new Intent(getApplicationContext(), Stats.class);
+                startActivity(intent);
+                return true;
+            case R.id.mapdata:
+                intent = new Intent(getApplicationContext(), Map.class);
+                startActivity(intent);
+                return true;
         }
-        return super.onOptionsItemSelected(item);
+        return false;
     }
 
     // '리스트뷰'
@@ -231,7 +237,7 @@ public class Main_home extends AppCompatActivity {
             }
         });
         new android.app.AlertDialog.Builder(Main_home.this)
-                .setTitle("Select Categoty")
+                .setTitle("Select Category")
                 .setView(dialogview)
                 .setPositiveButton("확인", new DialogInterface.OnClickListener() {
                     @RequiresApi(api = Build.VERSION_CODES.O)
