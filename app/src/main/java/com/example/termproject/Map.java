@@ -81,6 +81,8 @@ public class Map extends AppCompatActivity implements OnMapReadyCallback {
         SupportMapFragment mapFragment = (SupportMapFragment) getSupportFragmentManager().findFragmentById(R.id.map);
         mapFragment.getMapAsync(this);
 
+
+
         // 뒤로가기
         mapbtn1.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -129,6 +131,8 @@ public class Map extends AppCompatActivity implements OnMapReadyCallback {
         }catch (SQLException mSQLException){
             throw mSQLException;
         }
+
+
     }
 
 
@@ -178,11 +182,16 @@ public class Map extends AppCompatActivity implements OnMapReadyCallback {
                                 memoHelper.close();
                                 Toast.makeText(getApplicationContext(), "마커가 저장되었습니다.", Toast.LENGTH_SHORT).show();
                                 googleMap.addMarker(markerOptions);
-                                dialogParentView.removeView(dialogview);
+
+                                if (dialogview.getParent() != null)
+                                    ((ViewGroup) dialogParentView.getParent()).removeView(dialogview);
+
                             }
+
                         })
                         .setNegativeButton("취소", null)
                         .show();
+
             }
         });
 

@@ -37,14 +37,16 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.TermProject"
         android:usesCleartextTraffic="true">
-        <!-- <activity -->
-        <!-- android:name=".StartPage" -->
-        <!-- android:exported="true"> -->
-        <!-- <intent-filter> -->
-        <!-- <action android:name="android.intent.action.MAIN" /> -->
-        <!-- <category android:name="android.intent.category.LAUNCHER" /> -->
-        <!-- </intent-filter> -->
-        <!-- </activity> -->
+
+         <activity
+             android:name=".StartPage"
+             android:exported="true">
+             <intent-filter>
+                 <action android:name="android.intent.action.MAIN" />
+                 <category android:name="android.intent.category.LAUNCHER" />
+             </intent-filter>
+         </activity>
+
         <activity
             android:name=".Main_home"
             android:exported="true">
@@ -112,7 +114,7 @@
         <!-- 승연 : AIzaSyDspkScsPQPiQyZm74iKb2ozcMCQyxWNi8 -->
         <meta-data
             android:name="com.google.android.maps.v2.API_KEY"
-            android:value="AIzaSyAaaQQ78M-cxbcZse4ZaAl4-yEjcUKKAMo" />
+            android:value="AIzaSyDspkScsPQPiQyZm74iKb2ozcMCQyxWNi8" />
     </application>
 
 </manifest>
