@@ -1,8 +1,13 @@
 package com.example.termproject;
 
 import android.content.Context;
+import android.database.Cursor;
+import android.database.SQLException;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
+
+import java.util.ArrayList;
+import java.util.List;
 
 public class MemoDBHelper extends SQLiteOpenHelper {
 
@@ -18,9 +23,13 @@ public class MemoDBHelper extends SQLiteOpenHelper {
                 "address TEXT, camera TEXT, album TEXT, emotion TEXT, etime INTEGER, edistance INTEGER);");
 <<<<<<< Updated upstream
 
+<<<<<<< HEAD
         db.execSQL("CREATE TABLE marker (id INTEGER PRIMARY KEY AUTOINCREMENT, name TEXT, latitude INTEGER, longitude INTEGER)");
 =======
 >>>>>>> Stashed changes
+=======
+        db.execSQL("CREATE TABLE marker (id INTEGER PRIMARY KEY AUTOINCREMENT, name TEXT, latitude TEXT, longitude TEXT)");
+>>>>>>> main
     }
 
     @Override
@@ -32,6 +41,6 @@ public class MemoDBHelper extends SQLiteOpenHelper {
 =======
 >>>>>>> Stashed changes
         onCreate(db);
-
     }
+
 }

@@ -7,10 +7,11 @@
         <entry key="..\:/Users/yuuuk/AndroidStudioProjects/TermProject/app/src/main/res/drawable/camera.xml" value="0.1835" />
         <entry key="..\:/Users/yuuuk/AndroidStudioProjects/TermProject/app/src/main/res/layout/activity_cmaps.xml" value="0.175" />
         <entry key="..\:/Users/yuuuk/AndroidStudioProjects/TermProject/app/src/main/res/layout/activity_main15.xml" value="0.175" />
-        <entry key="..\:/Users/yuuuk/AndroidStudioProjects/TermProject/app/src/main/res/layout/activity_main_home.xml" value="0.1" />
+        <entry key="..\:/Users/yuuuk/AndroidStudioProjects/TermProject/app/src/main/res/layout/activity_main_home.xml" value="0.4466666666666667" />
         <entry key="..\:/Users/yuuuk/AndroidStudioProjects/TermProject/app/src/main/res/layout/activity_map.xml" value="0.3920653442240373" />
         <entry key="..\:/Users/yuuuk/AndroidStudioProjects/TermProject/app/src/main/res/layout/activity_memo_daily.xml" value="0.1" />
         <entry key="..\:/Users/yuuuk/AndroidStudioProjects/TermProject/app/src/main/res/layout/activity_memo_study.xml" value="0.17395833333333333" />
+        <entry key="..\:/Users/yuuuk/AndroidStudioProjects/TermProject/app/src/main/res/layout/activity_memo_view.xml" value="0.1" />
         <entry key="..\:/Users/yuuuk/AndroidStudioProjects/TermProject/app/src/main/res/layout/activity_memomap.xml" value="0.1" />
         <entry key="..\:/Users/yuuuk/AndroidStudioProjects/TermProject/app/src/main/res/layout/activity_start_page.xml" value="0.16041666666666668" />
         <entry key="..\:/Users/yuuuk/AndroidStudioProjects/TermProject/app/src/main/res/layout/activity_stats.xml" value="0.22" />
@@ -18,6 +19,7 @@
         <entry key="..\:/Users/yuuuk/AndroidStudioProjects/TermProject/app/src/main/res/layout/datedialog.xml" value="0.1" />
         <entry key="..\:/Users/yuuuk/AndroidStudioProjects/TermProject/app/src/main/res/layout/dialog.xml" value="0.175" />
         <entry key="..\:/Users/yuuuk/AndroidStudioProjects/TermProject/app/src/main/res/layout/item_list.xml" value="0.14666666666666667" />
+        <entry key="..\:/Users/yuuuk/AndroidStudioProjects/TermProject/app/src/main/res/layout/map_dialog.xml" value="0.175" />
         <entry key="..\:/Users/yuuuk/AndroidStudioProjects/TermProject/app/src/main/res/layout/memo_daily.xml" value="0.3333333333333333" />
         <entry key="..\:/Users/yuuuk/AndroidStudioProjects/TermProject/app/src/main/res/layout/memo_exercise.xml" value="0.16666666666666666" />
         <entry key="..\:/Users/yuuuk/AndroidStudioProjects/TermProject/app/src/main/res/layout/memo_study.xml" value="0.1" />
