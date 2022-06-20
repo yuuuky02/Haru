@@ -93,7 +93,11 @@
         </activity>
         <activity
             android:name=".Map"
-            android:exported="false" /> <!-- 본인 API 키 -->
+            android:exported="false" />
+        <activity
+            android:name=".MemoMap"
+            android:exported="false" />
+        <!-- 본인 API 키 -->
         <!-- 유경 : AIzaSyAaaQQ78M-cxbcZse4ZaAl4-yEjcUKKAMo -->
         <!-- 승연 : AIzaSyDspkScsPQPiQyZm74iKb2ozcMCQyxWNi8 -->
         <meta-data

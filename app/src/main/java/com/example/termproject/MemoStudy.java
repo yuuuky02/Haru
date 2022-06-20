@@ -164,7 +164,7 @@ public class MemoStudy extends AppCompatActivity {
         btn5_s.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(getApplicationContext(), com.example.termproject.Map.class);
+                Intent intent = new Intent(getApplicationContext(), com.example.termproject.MemoMap.class);
                 startActivityForResult(intent, GPS_ENABLE_REQUEST_CODE);
             }
         });

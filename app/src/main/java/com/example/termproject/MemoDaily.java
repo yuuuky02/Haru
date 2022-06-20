@@ -47,7 +47,7 @@ public class MemoDaily extends AppCompatActivity {
 
     private static final int REQ_CODE_SELECT_CAMERA = 100;
     private static final int REQ_CODE_SELECT_IMAGE = 200;
-    private static final int GPS_ENABLE_REQUEST_CODE = 300;
+    private static final int GPS_MYLOCATION_REQUEST_CODE = 300;
 
     Bitmap bitmap, imageBitmap;
     Button btn1_d, btn2_d, btn3_d, btn4_d, btn5_d, album_btn1, album_btn2, album_btn3, album_btn4;
@@ -176,8 +176,8 @@ public class MemoDaily extends AppCompatActivity {
         btn5_d.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(getApplicationContext(), com.example.termproject.Map.class);
-                startActivityForResult(intent, GPS_ENABLE_REQUEST_CODE);
+                Intent intent = new Intent(getApplicationContext(), com.example.termproject.MemoMap.class);
+                startActivityForResult(intent, GPS_MYLOCATION_REQUEST_CODE);
 
                 intent=getIntent();
                 address=intent.getStringExtra("address");
@@ -298,7 +298,7 @@ public class MemoDaily extends AppCompatActivity {
                         e.printStackTrace();
                     }
                     break;
-                case GPS_ENABLE_REQUEST_CODE:
+                case GPS_MYLOCATION_REQUEST_CODE:
                     if (resultCode == RESULT_OK) {
                         tv3_d.setText(data.getStringExtra("address"));
                     }

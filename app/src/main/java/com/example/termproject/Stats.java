@@ -5,6 +5,7 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Context;
 import android.content.DialogInterface;
+import android.content.Intent;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
@@ -25,7 +26,7 @@ public class Stats extends AppCompatActivity {
     private static final int MAX_YEAR = 2024;
     private static final int MIN_YEAR = 2020;
 
-    Button btn1_st;
+    Button btn1_st, btn2_st;
     TextView tv1_st, tv17_st, tv19_st;
     TextView[] tvst = new TextView[4];
     TextView[] tvst_result = new TextView[4];
@@ -41,6 +42,7 @@ public class Stats extends AppCompatActivity {
 
         memoHelper = new MemoDBHelper(this);
         btn1_st = findViewById(R.id.btn1_st);
+        btn2_st = findViewById(R.id.btn2_st);
         tv1_st = findViewById(R.id.tv1_st);
         tvst[0] = findViewById(R.id.tv3_st);
         tvst[1] = findViewById(R.id.tv5_st);
@@ -57,6 +59,15 @@ public class Stats extends AppCompatActivity {
         tv19_st = findViewById(R.id.tv19_st);
 
         btn1_st.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(getApplicationContext(), Main_home.class);
+                startActivity(intent);
+            }
+        });
+
+
+        btn2_st.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 datedialog = View.inflate(Stats.this, R.layout.datedialog, null);

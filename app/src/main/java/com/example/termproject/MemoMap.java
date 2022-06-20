@@ -2,42 +2,19 @@ package com.example.termproject;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
-import androidx.annotation.RequiresApi;
-import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.core.app.ActivityCompat;
 import androidx.core.content.ContextCompat;
 
 import android.Manifest;
-import android.content.ContentValues;
-import android.content.Context;
-import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.pm.PackageManager;
-import android.content.res.ColorStateList;
-import android.database.Cursor;
-import android.database.SQLException;
-import android.database.sqlite.SQLiteDatabase;
-import android.graphics.Bitmap;
-import android.graphics.BitmapFactory;
-import android.graphics.Canvas;
-import android.graphics.Color;
 import android.location.Address;
 import android.location.Geocoder;
 import android.location.LocationManager;
-import android.os.Build;
 import android.os.Bundle;
-import android.os.PatternMatcher;
-import android.provider.MediaStore;
 import android.util.Log;
-import android.view.LayoutInflater;
-import android.view.MotionEvent;
 import android.view.View;
-import android.view.ViewGroup;
 import android.widget.Button;
-import android.widget.EditText;
-import android.widget.RadioGroup;
-import android.widget.TextView;
 import android.widget.Toast;
 
 import com.google.android.gms.maps.CameraUpdateFactory;
@@ -48,39 +25,29 @@ import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.MarkerOptions;
 
 import java.io.IOException;
-import java.util.ArrayList;
 import java.util.List;
 import java.util.Locale;
 
-public class Map extends AppCompatActivity implements OnMapReadyCallback {
+public class MemoMap extends AppCompatActivity implements OnMapReadyCallback {
 
     private GpsTracker gpsTracker;
-    private static final int GPS_ENABLE_REQUEST_CODE = 400;
+    private static final int GPS_MYLOCATION_REQUEST_CODE = 300;
     private GoogleMap googleMap;
 
-    View dialogview;
-    EditText edt_md;
-
-    Button mapbtn1, mapbtn2;
-
-    SQLiteDatabase sqlDB;
-    MemoDBHelper memoHelper;
-    String d_name;
-    int d_latitude;
-    int d_longitude;
+    Button memomapbtn1, memomapbtn2;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_map);
-        mapbtn1 = findViewById(R.id.mapbtn1);
-        mapbtn2 = findViewById(R.id.mapbtn2);
+        setContentView(R.layout.activity_memomap);
+        memomapbtn1 = findViewById(R.id.memomapbtn1);
+        memomapbtn2 = findViewById(R.id.memomapbtn2);
 
-        SupportMapFragment mapFragment = (SupportMapFragment) getSupportFragmentManager().findFragmentById(R.id.map);
+        SupportMapFragment mapFragment = (SupportMapFragment) getSupportFragmentManager().findFragmentById(R.id.memomap);
         mapFragment.getMapAsync(this);
 
         // 뒤로가기
-        mapbtn1.setOnClickListener(new View.OnClickListener() {
+        memomapbtn1.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 setResult(RESULT_CANCELED);
@@ -89,17 +56,17 @@ public class Map extends AppCompatActivity implements OnMapReadyCallback {
         });
 
         // 나의 위치
-        mapbtn2.setOnClickListener(new View.OnClickListener() {
+        memomapbtn2.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                gpsTracker = new GpsTracker(Map.this);
+                gpsTracker = new GpsTracker(MemoMap.this);
 
                 double latitude = gpsTracker.getLatitude();
                 double longitude = gpsTracker.getLongitude();
 
                 String address = getCurrentAddress(latitude, longitude);
 
-                Toast.makeText(Map.this, "현재위치 \n위도 " + latitude + "\n경도 " + longitude, Toast.LENGTH_LONG).show();
+                Toast.makeText(MemoMap.this, "현재위치 \n위도 " + latitude + "\n경도 " + longitude, Toast.LENGTH_LONG).show();
 
                 Intent intent = new Intent();
                 intent.putExtra("address", address);
@@ -109,14 +76,9 @@ public class Map extends AppCompatActivity implements OnMapReadyCallback {
         });
     }
 
-
     @Override
     public void onMapReady(@NonNull GoogleMap googleMap) {
         this.googleMap = googleMap;
-
-        dialogview=(View)View.inflate(Map.this, R.layout.map_dialog, null);
-        edt_md=dialogview.findViewById(R.id.edt_md);
-
         LatLng latLng = new LatLng(37.351756, 126.742844);
         googleMap.moveCamera(CameraUpdateFactory.newLatLng(latLng));
         googleMap.moveCamera(CameraUpdateFactory.zoomTo(15));
@@ -127,60 +89,10 @@ public class Map extends AppCompatActivity implements OnMapReadyCallback {
                 == PackageManager.PERMISSION_GRANTED){
             googleMap.setMyLocationEnabled(true);
         }
-
-        memoHelper= new MemoDBHelper(this);
-
-        //조회
-        sqlDB = memoHelper.getReadableDatabase();
-        Cursor cursor;
-        cursor = sqlDB.rawQuery("SELECT name FROM marker", null);
-
-        if (cursor.moveToNext()) {
-            d_name = cursor.getString(0);
-
-            markerOptions.position(new LatLng(d_latitude, d_longitude));
-            markerOptions.title(d_name);
-            googleMap.addMarker(markerOptions);
-
-        }
-        memoHelper.close();
-
-
-        //맵 터치 시 마커생성
-        googleMap.setOnMapClickListener(new GoogleMap.OnMapClickListener() {
-
-            @Override
-            public void onMapClick(@NonNull LatLng point) {
-                Double latitude = point.latitude; //위도
-                Double longitude = point.longitude;  //경도
-                markerOptions.position(new LatLng(latitude, longitude));
-
-                AlertDialog.Builder dlg2 = new AlertDialog.Builder(Map.this);
-                dlg2.setTitle("마커 이름을 입력하세요.");
-                dlg2.setView(dialogview);
-                dlg2.setPositiveButton("확인", new DialogInterface.OnClickListener() {
-                    @Override
-                    public void onClick(DialogInterface dialogInterface, int i) {
-                        ContentValues row;
-                        sqlDB = memoHelper.getWritableDatabase();
-                        row = new ContentValues();
-                        row.put("name", edt_md.getText().toString());
-                        row.put("latitude", latitude);
-                        row.put("longitude", longitude);
-                        sqlDB.insert("marker", null, row);
-                        memoHelper.close();
-                        Toast.makeText(getApplicationContext(), "마커가 저장되었습니다.", Toast.LENGTH_SHORT).show();
-                        googleMap.addMarker(markerOptions);
-                    }
-                });
-                dlg2.setNegativeButton("취소", null);
-                dlg2.show();
-
-            }
-        });
     }
 
     public static final int MY_PERMISSIONS_REQUEST_LOCATION = 99;
+
 
     @Override
     public void onRequestPermissionsResult(int permsRequestCode,
@@ -241,7 +153,7 @@ public class Map extends AppCompatActivity implements OnMapReadyCallback {
         super.onActivityResult(requestCode, resultCode, data);
         if (resultCode == RESULT_OK) {
             switch (requestCode) {
-                case GPS_ENABLE_REQUEST_CODE:
+                case GPS_MYLOCATION_REQUEST_CODE:
                     if (checkLocationServicesStatus()) {
                         if (checkLocationServicesStatus()) {
                             Log.d("@@@", "onActivityResult : GPS 활성화 되있음");
