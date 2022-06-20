@@ -62,7 +62,6 @@
                 android:layout_marginRight="10dp"
                 android:background="@drawable/camera"
                 android:backgroundTint="#000000"
-                android:onClick="onCamera"
                 tools:ignore="SpeakableTextPresentCheck" />
 
             <Button
@@ -71,8 +70,7 @@
                 android:layout_height="40dp"
                 android:layout_marginRight="10dp"
                 android:background="@drawable/photo"
-                android:backgroundTint="#000000"
-                android:onClick="onAlbum" />
+                android:backgroundTint="#000000" />
 
             <Button
                 android:id="@+id/btn5_ml"
@@ -80,8 +78,7 @@
                 android:layout_height="40dp"
                 android:layout_marginRight="10dp"
                 android:background="@drawable/location"
-                android:backgroundTint="#000000"
-                android:onClick="onlocation" />
+                android:backgroundTint="#000000" />
 
             <TextView
                 android:id="@+id/tv2_ml"

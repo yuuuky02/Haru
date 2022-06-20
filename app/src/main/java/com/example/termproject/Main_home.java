@@ -70,6 +70,7 @@ public class Main_home extends AppCompatActivity {
 
     Intent intent;
 
+    @RequiresApi(api = Build.VERSION_CODES.O)
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -91,7 +92,6 @@ public class Main_home extends AppCompatActivity {
         btn2_list = findViewById(R.id.btn2_list);
 
         cv.setOnDateChangeListener(new CalendarView.OnDateChangeListener() {
-            @RequiresApi(api = Build.VERSION_CODES.O)
             @Override
             public void onSelectedDayChange(@NonNull CalendarView calendarView, int year, int month, int dayOfMonth) {
                 selectYear = year;
@@ -112,7 +112,21 @@ public class Main_home extends AppCompatActivity {
                     result = cursor1.getString(0);
                 }
                 if (Integer.valueOf(result) == 0) {
-                    onCategory();
+                    new android.app.AlertDialog.Builder(Main_home.this)
+                            .setTitle("기록된 내용이 없습니다.")
+                            .setPositiveButton("작성하기", new DialogInterface.OnClickListener() {
+                                @Override
+                                public void onClick(DialogInterface dialogInterface, int i) {
+                                    onCategory();
+                                }
+                            })
+                            .setNeutralButton("닫기", new DialogInterface.OnClickListener() {
+                                @Override
+                                public void onClick(DialogInterface dialog, int which) {
+                                    displayList();
+                                }
+                            })
+                            .show();
                 }else{ // 있으면 '리스트뷰' 뜨기
                     new android.app.AlertDialog.Builder(Main_home.this)
                             .setPositiveButton("작성하기", new DialogInterface.OnClickListener() {
@@ -173,7 +187,6 @@ public class Main_home extends AppCompatActivity {
         }
         return false;
     }
-
     // '리스트뷰'
     @RequiresApi(api = Build.VERSION_CODES.O)
     void displayList() {
@@ -190,6 +203,7 @@ public class Main_home extends AppCompatActivity {
     }
 
     // '카테고리' 대화창
+    @RequiresApi(api = Build.VERSION_CODES.O)
     void onCategory() {
         dialogview=(View)View.inflate(Main_home.this, R.layout.dialog, null);
         rdg = dialogview.findViewById(R.id.radiogroup);

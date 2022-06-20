@@ -2,6 +2,8 @@ package com.example.termproject;
 
 import static android.app.Activity.RESULT_OK;
 
+import static androidx.core.app.ActivityCompat.startActivityForResult;
+
 import android.app.AlertDialog;
 import android.content.ContentValues;
 import android.content.Context;
@@ -27,6 +29,7 @@ import android.widget.BaseAdapter;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
+import android.widget.ListView;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
 import android.widget.TextView;
@@ -59,7 +62,6 @@ public class ListViewAdapter extends BaseAdapter {
     public long getItemId(int i) {
         return i;
     }
-
     TextView tvlist1, tvlist2, tvlist3;
     Button btn1_list, btn2_list;
     TextView tv1_ml, tv2_ml, tv3_ml;
@@ -158,6 +160,13 @@ public class ListViewAdapter extends BaseAdapter {
                     }
                 });
 
+                btn3_ml.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        Intent intent = new Intent(context.getApplicationContext(), MemoDaily.class);
+                        context.startActivity(intent);
+                    }
+                });
                 // 카메라 사진 받기
                 Bitmap cameraBitmap = null;
                 byte[] cameraByte = listdata.getCamera();
@@ -198,6 +207,18 @@ public class ListViewAdapter extends BaseAdapter {
                             }
                         })
                         .show();
+            }
+        });
+
+        btn2_list.setOnClickListener(new View.OnClickListener() {
+            @RequiresApi(api = Build.VERSION_CODES.O)
+            @Override
+            public void onClick(View v) {
+                MemoDBHelper memoHelper = new MemoDBHelper(context);
+                SQLiteDatabase db = memoHelper.getWritableDatabase();
+                db.delete("memo", "date=? and category=?", new String[]{listdata.getDate(), listdata.getCategory()});
+                memoHelper.close();
+                Toast.makeText(context.getApplicationContext(), "삭제되었습니다.", Toast.LENGTH_SHORT).show();
             }
         });
         return view;

@@ -106,12 +106,17 @@ public class Stats extends AppCompatActivity {
                                 }
 
                                 // 운동_운동시간 월별 합계
+
                                 cursor = db.rawQuery("SELECT sum(etime) FROM memo WHERE substr(date,1,8)=? and category=?",
                                         new String[]{tv1_st.getText().toString(), "운동"});
                                 if (cursor.moveToNext()) {
                                     result = cursor.getString(0);
                                 }
-                                tv17_st.setText(result+" 시간");
+                                if(result==null){
+                                    tv17_st.setText(0+" 시간");
+                                }else{
+                                    tv17_st.setText(result+" 시간");
+                                }
 
                                 // 운동_달린거리 월별 합계
                                 cursor = db.rawQuery("SELECT sum(edistance) FROM memo WHERE substr(date,1,8)=? and category=?",
@@ -119,7 +124,11 @@ public class Stats extends AppCompatActivity {
                                 if (cursor.moveToNext()) {
                                     result = cursor.getString(0);
                                 }
-                                tv19_st.setText(result+" km");
+                                if(result==null){
+                                    tv17_st.setText(0+" km");
+                                }else{
+                                    tv19_st.setText(result+" km");
+                                }
 
 
                                 memoHelper.close();
