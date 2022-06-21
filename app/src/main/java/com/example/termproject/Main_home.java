@@ -65,7 +65,7 @@ public class Main_home extends AppCompatActivity {
     String category = null;
 
     Menu menu;
-    MenuItem stats, cafedata, mapdata;
+    MenuItem monthMemodata, stats, cafedata, mapdata;
 
     Intent intent;
 
@@ -83,6 +83,7 @@ public class Main_home extends AppCompatActivity {
         tv1 = findViewById(R.id.tv_calendar);
         cv = findViewById(R.id.calendarView);
         rdg = findViewById(R.id.radiogroup);
+        monthMemodata = findViewById(R.id.monthMemodata);
         stats = findViewById(R.id.stats);
         cafedata = findViewById(R.id.cafedata);
         mapdata = findViewById(R.id.mapdata);
@@ -156,6 +157,10 @@ public class Main_home extends AppCompatActivity {
     public boolean onOptionsItemSelected(MenuItem item) {
         int id = item.getItemId();
         switch (id) {
+            case R.id.monthMemodata:
+                intent = new Intent(getApplicationContext(), MonthMemodata.class);
+                startActivity(intent);
+                return true;
             case R.id.stats:
                 intent = new Intent(getApplicationContext(), Stats.class);
                 startActivity(intent);

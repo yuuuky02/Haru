@@ -63,7 +63,7 @@ public class Map extends AppCompatActivity implements OnMapReadyCallback {
     View dialogview;
     EditText edt_md;
 
-    Button mapbtn1, mapbtn2;
+    Button mapbtn1;
 
     SQLiteDatabase sqlDB;
     MemoDBHelper memoHelper;
@@ -79,7 +79,6 @@ public class Map extends AppCompatActivity implements OnMapReadyCallback {
         setContentView(R.layout.activity_map);
 
         mapbtn1 = findViewById(R.id.mapbtn1);
-        mapbtn2 = findViewById(R.id.mapbtn2);
 
         SupportMapFragment mapFragment = (SupportMapFragment) getSupportFragmentManager().findFragmentById(R.id.map);
         mapFragment.getMapAsync(this);
@@ -89,27 +88,6 @@ public class Map extends AppCompatActivity implements OnMapReadyCallback {
             @Override
             public void onClick(View v) {
                 setResult(RESULT_CANCELED);
-                finish();
-            }
-        });
-
-        // 나의 위치
-        mapbtn2.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                gpsTracker = new GpsTracker(Map.this);
-
-                double latitude = gpsTracker.getLatitude();
-                double longitude = gpsTracker.getLongitude();
-
-//                String address = getCurrentAddress(latitude, longitude); // 현재 위치 주소
-                String address = "위도 : "+latitude+", 경도 : "+longitude; // 현재 위치 위도, 경도
-
-                Toast.makeText(Map.this, "현재위치 \n위도 " + latitude + "\n경도 " + longitude, Toast.LENGTH_LONG).show();
-
-                Intent intent = new Intent();
-                intent.putExtra("address", address);
-                setResult(RESULT_OK, intent);
                 finish();
             }
         });
@@ -224,26 +202,6 @@ public class Map extends AppCompatActivity implements OnMapReadyCallback {
                 return;
             }
         }
-    }
-
-    // 현재 위치 받기
-    public String getCurrentAddress( double latitude, double longitude) {
-        Geocoder geocoder = new Geocoder(this, Locale.getDefault());
-        List<Address> addresses;
-        try {
-            addresses = geocoder.getFromLocation(
-                    latitude,
-                    longitude,
-                    7);
-        } catch (IOException ioException) {
-            return "사용불가";
-        }
-        if (addresses == null || addresses.size() == 0) {
-            Toast.makeText(this, "주소 미발견", Toast.LENGTH_LONG).show();
-            return "주소 미발견";
-        }
-        Address address = addresses.get(0);
-        return address.getAddressLine(0).toString()+"\n";
     }
 
     // 서비스 권한 체크

@@ -64,8 +64,8 @@ public class MemoMap extends AppCompatActivity implements OnMapReadyCallback {
                 double latitude = gpsTracker.getLatitude();
                 double longitude = gpsTracker.getLongitude();
 
-//                String address = getCurrentAddress(latitude, longitude); // 현재 위치 주소
-                String address = "위도 : "+latitude+", 경도 : "+longitude; // 현재 위치 위도, 경도
+                String address = getCurrentAddress(latitude, longitude); // 현재 위치 주소
+//                String address = "위도 : "+latitude+", 경도 : "+longitude; // 현재 위치 위도, 경도
 
                 Toast.makeText(MemoMap.this, "현재위치 \n위도 " + latitude + "\n경도 " + longitude, Toast.LENGTH_LONG).show();
 

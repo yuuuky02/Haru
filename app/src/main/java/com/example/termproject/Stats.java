@@ -33,8 +33,8 @@ public class Stats extends AppCompatActivity {
     TextView[] tvst_emo = new TextView[3];
     View datedialog;
     String Mmonth;
-
     String date;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -58,6 +58,7 @@ public class Stats extends AppCompatActivity {
         tv17_st = findViewById(R.id.tv17_st);
         tv19_st = findViewById(R.id.tv19_st);
 
+        // 닫기
         btn1_st.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -66,6 +67,7 @@ public class Stats extends AppCompatActivity {
             }
         });
 
+        // 날짜 선택
         btn2_st.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {

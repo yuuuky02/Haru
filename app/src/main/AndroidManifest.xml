@@ -37,40 +37,33 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.TermProject"
         android:usesCleartextTraffic="true">
+        <activity
+            android:name=".StartPage"
+            android:exported="true">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
 
-         <activity
-             android:name=".StartPage"
-             android:exported="true">
-             <intent-filter>
-                 <action android:name="android.intent.action.MAIN" />
-                 <category android:name="android.intent.category.LAUNCHER" />
-             </intent-filter>
-         </activity>
-
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
         <activity
             android:name=".Main_home"
-            android:exported="false">
-        </activity>
+            android:exported="false"></activity>
         <activity
             android:name=".Stats"
-            android:exported="false">
-        </activity>
+            android:exported="false"></activity>
         <activity
             android:name=".MemoDaily"
-            android:exported="false">
-        </activity>
+            android:exported="false"></activity>
         <activity
             android:name=".MemoExercise"
-            android:exported="false">
-        </activity>
+            android:exported="false"></activity>
         <activity
             android:name=".MemoStudy"
-            android:exported="false">
-        </activity>
+            android:exported="false"></activity>
         <activity
             android:name=".MemoTrip"
-            android:exported="false">
-        </activity>
+            android:exported="false"></activity>
         <activity
             android:name=".Map"
             android:exported="false" />
@@ -80,6 +73,11 @@
         <activity
             android:name=".MemoMap"
             android:exported="false" />
+        <activity
+            android:name=".MonthMemodata"
+            android:exported="false">
+        </activity>
+
 
         <!-- 본인 API 키 -->
         <!-- 유경 : AIzaSyAaaQQ78M-cxbcZse4ZaAl4-yEjcUKKAMo -->

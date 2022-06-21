@@ -26,10 +26,10 @@
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:layout_weight="1"
+                    android:fontFamily="@font/leeseoyun"
                     android:paddingLeft="15dp"
                     android:paddingTop="15dp"
                     android:text="카테고리"
-                    android:fontFamily="@font/leeseoyun"
                     android:textSize="18sp"
                     android:textStyle="bold" />
 
