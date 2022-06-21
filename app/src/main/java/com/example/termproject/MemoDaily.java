@@ -105,7 +105,6 @@ public class MemoDaily extends AppCompatActivity {
         album_iv1 = findViewById(R.id.album_iv1);
         calendarView = findViewById(R.id.calendarView);
 
-
         // close
         btn1_d.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -212,7 +211,6 @@ public class MemoDaily extends AppCompatActivity {
                 return;
             }
         });
-
 
         //캘린더날짜
         intent=getIntent();

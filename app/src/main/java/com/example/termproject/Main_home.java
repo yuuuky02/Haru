@@ -60,7 +60,6 @@ public class Main_home extends AppCompatActivity {
     RadioGroup rdg;
     RadioButton rbtn1, rbtn2, rbtn3, rbtn4;
     View dialogview;
-    String fileName;
     int selectYear, selectMonth, selectDay;
     String Mmonth;
     String category = null;

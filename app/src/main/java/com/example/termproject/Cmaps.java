@@ -65,7 +65,7 @@ public class Cmaps extends AppCompatActivity implements OnMapReadyCallback {
             public void onMapLoaded() {
                 mMap.moveCamera(CameraUpdateFactory.newLatLng(Espresso));
                 mMap.moveCamera(CameraUpdateFactory.zoomTo(40));
-                mMap.animateCamera(CameraUpdateFactory.zoomTo(10), 2000, null);
+                mMap.animateCamera(CameraUpdateFactory.zoomTo(15), 2000, null);
 
             }
         });
@@ -82,7 +82,7 @@ public class Cmaps extends AppCompatActivity implements OnMapReadyCallback {
             public void onMapLoaded() {
                 mMap.moveCamera(CameraUpdateFactory.newLatLng(Thepeach));
                 mMap.moveCamera(CameraUpdateFactory.zoomTo(40));
-                mMap.animateCamera(CameraUpdateFactory.zoomTo(10), 2000, null);
+                mMap.animateCamera(CameraUpdateFactory.zoomTo(15), 2000, null);
 
             }
         });
@@ -99,7 +99,7 @@ public class Cmaps extends AppCompatActivity implements OnMapReadyCallback {
             public void onMapLoaded() {
                 mMap.moveCamera(CameraUpdateFactory.newLatLng(Cake));
                 mMap.moveCamera(CameraUpdateFactory.zoomTo(40));
-                mMap.animateCamera(CameraUpdateFactory.zoomTo(10), 2000, null);
+                mMap.animateCamera(CameraUpdateFactory.zoomTo(15), 2000, null);
             }
         });
 
@@ -115,7 +115,7 @@ public class Cmaps extends AppCompatActivity implements OnMapReadyCallback {
             public void onMapLoaded() {
                 mMap.moveCamera(CameraUpdateFactory.newLatLng(Bakery));
                 mMap.moveCamera(CameraUpdateFactory.zoomTo(40));
-                mMap.animateCamera(CameraUpdateFactory.zoomTo(10), 2000, null);
+                mMap.animateCamera(CameraUpdateFactory.zoomTo(15), 2000, null);
             }
         });
 
@@ -131,7 +131,7 @@ public class Cmaps extends AppCompatActivity implements OnMapReadyCallback {
             public void onMapLoaded() {
                 mMap.moveCamera(CameraUpdateFactory.newLatLng(Boqui));
                 mMap.moveCamera(CameraUpdateFactory.zoomTo(40));
-                mMap.animateCamera(CameraUpdateFactory.zoomTo(10), 2000, null);
+                mMap.animateCamera(CameraUpdateFactory.zoomTo(15), 2000, null);
             }
         });
 
@@ -147,7 +147,7 @@ public class Cmaps extends AppCompatActivity implements OnMapReadyCallback {
             public void onMapLoaded() {
                 mMap.moveCamera(CameraUpdateFactory.newLatLng(Cafe_302));
                 mMap.moveCamera(CameraUpdateFactory.zoomTo(40));
-                mMap.animateCamera(CameraUpdateFactory.zoomTo(10), 2000, null);
+                mMap.animateCamera(CameraUpdateFactory.zoomTo(15), 2000, null);
             }
         });
 
@@ -163,7 +163,7 @@ public class Cmaps extends AppCompatActivity implements OnMapReadyCallback {
             public void onMapLoaded() {
                 mMap.moveCamera(CameraUpdateFactory.newLatLng(Cafe_10));
                 mMap.moveCamera(CameraUpdateFactory.zoomTo(40));
-                mMap.animateCamera(CameraUpdateFactory.zoomTo(10), 2000, null);
+                mMap.animateCamera(CameraUpdateFactory.zoomTo(15), 2000, null);
             }
         });
 
@@ -179,7 +179,7 @@ public class Cmaps extends AppCompatActivity implements OnMapReadyCallback {
             public void onMapLoaded() {
                 mMap.moveCamera(CameraUpdateFactory.newLatLng(Cafestar));
                 mMap.moveCamera(CameraUpdateFactory.zoomTo(40));
-                mMap.animateCamera(CameraUpdateFactory.zoomTo(10), 2000, null);
+                mMap.animateCamera(CameraUpdateFactory.zoomTo(15), 2000, null);
             }
         });
 

@@ -66,7 +66,6 @@ public class Stats extends AppCompatActivity {
             }
         });
 
-
         btn2_st.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -117,7 +116,6 @@ public class Stats extends AppCompatActivity {
                                 }
 
                                 // 운동_운동시간 월별 합계
-
                                 cursor = db.rawQuery("SELECT sum(etime) FROM memo WHERE substr(date,1,8)=? and category=?",
                                         new String[]{tv1_st.getText().toString(), "운동"});
                                 if (cursor.moveToNext()) {
@@ -140,8 +138,6 @@ public class Stats extends AppCompatActivity {
                                 }else{
                                     tv19_st.setText(result+" km");
                                 }
-
-
                                 memoHelper.close();
                                 Toast.makeText(getApplicationContext(), "날짜를 선택했습니다.", Toast.LENGTH_SHORT).show();
                             }

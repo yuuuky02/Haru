@@ -64,7 +64,8 @@ public class MemoMap extends AppCompatActivity implements OnMapReadyCallback {
                 double latitude = gpsTracker.getLatitude();
                 double longitude = gpsTracker.getLongitude();
 
-                String address = getCurrentAddress(latitude, longitude);
+//                String address = getCurrentAddress(latitude, longitude); // 현재 위치 주소
+                String address = "위도 : "+latitude+", 경도 : "+longitude; // 현재 위치 위도, 경도
 
                 Toast.makeText(MemoMap.this, "현재위치 \n위도 " + latitude + "\n경도 " + longitude, Toast.LENGTH_LONG).show();
 
@@ -92,7 +93,6 @@ public class MemoMap extends AppCompatActivity implements OnMapReadyCallback {
     }
 
     public static final int MY_PERMISSIONS_REQUEST_LOCATION = 99;
-
 
     @Override
     public void onRequestPermissionsResult(int permsRequestCode,
@@ -122,7 +122,6 @@ public class MemoMap extends AppCompatActivity implements OnMapReadyCallback {
         List<Address> addresses;
 
         try {
-
             addresses = geocoder.getFromLocation(
                     latitude,
                     longitude,
@@ -130,15 +129,12 @@ public class MemoMap extends AppCompatActivity implements OnMapReadyCallback {
         } catch (IOException ioException) {
             return "위도 :" + latitude + ", 경도 :" + longitude;
         }
-
         if (addresses == null || addresses.size() == 0) {
             Toast.makeText(this, "주소 미발견", Toast.LENGTH_LONG).show();
             return "주소 미발견";
         }
-
         Address address = addresses.get(0);
         return address.getAddressLine(0).toString()+"\n";
-
     }
 
     public boolean checkLocationServicesStatus() {

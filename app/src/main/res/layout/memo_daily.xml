@@ -164,6 +164,7 @@
                     android:layout_height="wrap_content"
                     android:layout_gravity="center_vertical"
                     android:button="@drawable/very_good"
+                    android:checked="true"
                     android:text="매우 좋음"
                     android:textColor="#FFFFFF" />
 

@@ -2,8 +2,6 @@ package com.example.termproject;
 
 import static android.app.Activity.RESULT_OK;
 
-import static androidx.core.app.ActivityCompat.startActivityForResult;
-
 import android.app.AlertDialog;
 import android.content.ContentValues;
 import android.content.Context;
@@ -161,6 +159,15 @@ public class ListViewAdapter extends BaseAdapter {
                         return;
                     }
                 });
+
+                btn3_ml.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        Intent intent = new Intent(context.getApplicationContext(), MemoDaily.class);
+                        context.startActivity(intent);
+                    }
+                });
+
                 // 카메라 사진 받기
                 cameraBitmap = null;
                 byte[] cameraByte = listdata.getCamera();

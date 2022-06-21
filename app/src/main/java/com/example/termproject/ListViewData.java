@@ -1,7 +1,5 @@
 package com.example.termproject;
 
-import java.sql.Blob;
-
 public class ListViewData {
     private int id;
     private String date;

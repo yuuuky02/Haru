@@ -7,6 +7,8 @@ import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.app.ActivityCompat;
 import androidx.core.content.ContextCompat;
+import androidx.fragment.app.FragmentManager;
+import androidx.fragment.app.FragmentTransaction;
 
 import android.Manifest;
 import android.content.ContentValues;
@@ -75,6 +77,7 @@ public class Map extends AppCompatActivity implements OnMapReadyCallback {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_map);
+
         mapbtn1 = findViewById(R.id.mapbtn1);
         mapbtn2 = findViewById(R.id.mapbtn2);
 
@@ -99,7 +102,8 @@ public class Map extends AppCompatActivity implements OnMapReadyCallback {
                 double latitude = gpsTracker.getLatitude();
                 double longitude = gpsTracker.getLongitude();
 
-                String address = getCurrentAddress(latitude, longitude);
+//                String address = getCurrentAddress(latitude, longitude); // 현재 위치 주소
+                String address = "위도 : "+latitude+", 경도 : "+longitude; // 현재 위치 위도, 경도
 
                 Toast.makeText(Map.this, "현재위치 \n위도 " + latitude + "\n경도 " + longitude, Toast.LENGTH_LONG).show();
 
@@ -131,7 +135,6 @@ public class Map extends AppCompatActivity implements OnMapReadyCallback {
         }
     }
 
-
     @Override
     public void onMapReady(@NonNull GoogleMap googleMap) {
         this.googleMap = googleMap;
@@ -153,7 +156,6 @@ public class Map extends AppCompatActivity implements OnMapReadyCallback {
 
         //맵 터치 시 마커생성
         googleMap.setOnMapClickListener(new GoogleMap.OnMapClickListener() {
-
             @Override
             public void onMapClick(@NonNull LatLng point) {
                 Double latitude = point.latitude; //위도
@@ -175,15 +177,19 @@ public class Map extends AppCompatActivity implements OnMapReadyCallback {
                                 sqlDB.insert("marker", null, row);
                                 memoHelper.close();
                                 Toast.makeText(getApplicationContext(), "마커가 저장되었습니다.", Toast.LENGTH_SHORT).show();
-                                googleMap.addMarker(markerOptions);
+
                                 dialogParentView.removeView(dialogview);
+                                LatLng latLng2 = new LatLng(Double.valueOf(latitude.toString()), Double.valueOf(longitude.toString()));
+                                googleMap.moveCamera(CameraUpdateFactory.newLatLng(latLng2));
+                                googleMap.moveCamera(CameraUpdateFactory.zoomTo(15));
+                                markerOptions = new MarkerOptions().position(latLng2).title(edt_md.getText().toString());
+                                googleMap.addMarker(markerOptions);
                             }
                         })
                         .setNegativeButton("취소", null)
                         .show();
             }
         });
-
         for(int i=0; i<mlist.size();i++) {
             String d_name = mlist.get(i).name;
             Double d_latitude = Double.valueOf(mlist.get(i).latitude);
