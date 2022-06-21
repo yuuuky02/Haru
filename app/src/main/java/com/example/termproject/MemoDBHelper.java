@@ -23,6 +23,8 @@ public class MemoDBHelper extends SQLiteOpenHelper {
                 "address TEXT, camera TEXT, album TEXT, emotion TEXT, etime INTEGER, edistance INTEGER);");
 
         db.execSQL("CREATE TABLE marker (id INTEGER PRIMARY KEY AUTOINCREMENT, name TEXT, latitude TEXT, longitude TEXT)");
+
+        db.execSQL("CREATE TABLE users (id INTEGER PRIMARY KEY AUTOINCREMENT, userName TEXT, userId INTEGER, userPassword INTEGER)");
     }
 
     @Override
@@ -30,6 +32,7 @@ public class MemoDBHelper extends SQLiteOpenHelper {
         // TODO Auto-generated method stub
         db.execSQL("DROP TABLE IF EXISTS memo");
         db.execSQL("DROP TABLE IF EXISTS marker");
+        db.execSQL("DROP TABLE IF EXISTS users");
         onCreate(db);
     }
 

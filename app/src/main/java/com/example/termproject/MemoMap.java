@@ -128,7 +128,7 @@ public class MemoMap extends AppCompatActivity implements OnMapReadyCallback {
                     longitude,
                     7);
         } catch (IOException ioException) {
-            return "사용불가";
+            return "위도 :" + latitude + ", 경도 :" + longitude;
         }
 
         if (addresses == null || addresses.size() == 0) {
