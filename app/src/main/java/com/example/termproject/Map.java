@@ -182,9 +182,7 @@ public class Map extends AppCompatActivity implements OnMapReadyCallback {
                                 memoHelper.close();
                                 Toast.makeText(getApplicationContext(), "마커가 저장되었습니다.", Toast.LENGTH_SHORT).show();
                                 googleMap.addMarker(markerOptions);
-
-                                if (dialogview.getParent() != null)
-                                    ((ViewGroup) dialogParentView.getParent()).removeView(dialogview);
+                                ((ViewGroup) dialogParentView.getParent()).removeView(dialogview);
 
                             }
 
