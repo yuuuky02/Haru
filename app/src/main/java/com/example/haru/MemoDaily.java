@@ -1,13 +1,11 @@
-package com.example.termproject;
+package com.example.haru;
 
 import android.app.AlertDialog;
 import android.content.ContentValues;
-import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.res.ColorStateList;
 import android.database.sqlite.SQLiteDatabase;
-import android.database.sqlite.SQLiteOpenHelper;
 import android.graphics.Bitmap;
 import android.graphics.Canvas;
 import android.graphics.Color;
@@ -18,6 +16,7 @@ import android.provider.MediaStore;
 import android.view.MotionEvent;
 import android.view.View;
 import android.widget.Button;
+import android.widget.CalendarView;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.RadioButton;
@@ -32,7 +31,7 @@ import androidx.core.app.ActivityCompat;
 import java.io.ByteArrayOutputStream;
 import java.io.IOException;
 
-public class MemoStudy extends AppCompatActivity {
+public class MemoDaily extends AppCompatActivity {
 
     MemoDBHelper memoHelper;
     SQLiteDatabase sqlDB;
@@ -41,24 +40,28 @@ public class MemoStudy extends AppCompatActivity {
 
     private static final int REQ_CODE_SELECT_CAMERA = 100;
     private static final int REQ_CODE_SELECT_IMAGE = 200;
-    private static final int GPS_ENABLE_REQUEST_CODE = 300;
+    private static final int GPS_MYLOCATION_REQUEST_CODE = 300;
 
     Bitmap bitmap, imageBitmap;
-    Button btn1_s, btn2_s, btn3_s, btn4_s, btn5_s, album_btn1, album_btn2, album_btn3, album_btn4;
-    RadioGroup rg_s;
-    RadioButton rb1_s, rb2_s, rb3_s;
-    EditText et1_s;
-    TextView tv1_s, tv2_s, tv3_s;
-    ImageView iv1_s, iv2_s, album_iv1;
+    Button btn1_d, btn2_d, btn3_d, btn4_d, btn5_d, album_btn1, album_btn2, album_btn3, album_btn4;
+    RadioGroup rg_d;
+    RadioButton rb1_d, rb2_d, rb3_d;
+    EditText et1_d;
+    TextView tv1_d, tv2_d, tv3_d;
+    ImageView iv1_d, iv2_d, album_iv1;
+
+    Intent intent;
+    String select1, select2, select3;
+
+    String address;
+
+    CalendarView calendarView;
+    int selectYear, selectMonth, selectDay;
 
     View albumdialog;
     Canvas canvas;
     Paint paint;
     Path path;
-
-    Intent intent;
-    String select7, select8, select9;
-
     String mode = "none";
     float upx = 0, upy = 0;
     static float width = 15F;
@@ -67,35 +70,36 @@ public class MemoStudy extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.memo_study);
+        setContentView(R.layout.memo_daily);
         ActivityCompat.requestPermissions(this, new String[]
                 {android.Manifest.permission.CAMERA,
                         android.Manifest.permission.ACCESS_FINE_LOCATION,
                         android.Manifest.permission.ACCESS_COARSE_LOCATION}, MODE_PRIVATE);
 
-        btn1_s = findViewById(R.id.btn1_s);
-        btn2_s = findViewById(R.id.btn2_s);
-        btn3_s = findViewById(R.id.btn3_s);
-        btn4_s = findViewById(R.id.btn4_s);
-        btn5_s = findViewById(R.id.btn5_s);
+        btn1_d = findViewById(R.id.btn1_d);
+        btn2_d = findViewById(R.id.btn2_d);
+        btn3_d = findViewById(R.id.btn3_d);
+        btn4_d = findViewById(R.id.btn4_d);
+        btn5_d = findViewById(R.id.btn5_d);
         album_btn1 = findViewById(R.id.album_btn1);
         album_btn2 = findViewById(R.id.album_btn2);
         album_btn3 = findViewById(R.id.album_btn3);
         album_btn4 = findViewById(R.id.album_btn4);
-        rg_s = findViewById(R.id.rg_s);
-        rb1_s = findViewById(R.id.rb1_s);
-        rb2_s = findViewById(R.id.rb2_s);
-        rb3_s = findViewById(R.id.rb3_s);
-        et1_s = findViewById(R.id.et1_s);
-        tv1_s = findViewById(R.id.tv1_s);
-        tv2_s = findViewById(R.id.tv2_s);
-        tv3_s = findViewById(R.id.tv3_s);
-        iv1_s = findViewById(R.id.iv1_s);
-        iv2_s = findViewById(R.id.iv2_s);
+        rg_d = findViewById(R.id.rg_d);
+        rb1_d = findViewById(R.id.rb1_d);
+        rb2_d = findViewById(R.id.rb2_d);
+        rb3_d = findViewById(R.id.rb3_d);
+        et1_d = findViewById(R.id.et1_d);
+        tv1_d = findViewById(R.id.tv1_d);
+        tv2_d = findViewById(R.id.tv2_d);
+        tv3_d = findViewById(R.id.tv3_d);
+        iv1_d = findViewById(R.id.iv1_d);
+        iv2_d = findViewById(R.id.iv2_d);
         album_iv1 = findViewById(R.id.album_iv1);
+        calendarView = findViewById(R.id.calendarView);
 
         // close
-        btn1_s.setOnClickListener(new View.OnClickListener() {
+        btn1_d.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(getApplicationContext(), Main_home.class);
@@ -105,18 +109,18 @@ public class MemoStudy extends AppCompatActivity {
 
         memoHelper = new MemoDBHelper(this);
         // 저장하기
-        btn2_s.setOnClickListener(new View.OnClickListener() {
+        btn2_d.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 ContentValues row;
                 sqlDB = memoHelper.getWritableDatabase();
                 row = new ContentValues();
-                row.put("date", tv2_s.getText().toString());     // 날짜
-                row.put("category", tv1_s.getText().toString()); // 카테고리
-                row.put("content", et1_s.getText().toString());  // 메모내용
+                row.put("date", tv2_d.getText().toString());     // 날짜
+                row.put("category", tv1_d.getText().toString()); // 카테고리
+                row.put("content", et1_d.getText().toString());  // 메모내용
                 row.put("camera", byteArrayCamera);             // 카메라 사진
                 row.put("album", byteArrayAlbum);               // 앨범 사진
-                row.put("address", tv3_s.getText().toString()); // 주소
+                row.put("address", tv3_d.getText().toString()); // 주소
                 row.put("emotion", emotion);                    // 감정
                 sqlDB.insert("memo", null, row);
                 memoHelper.close();
@@ -127,21 +131,21 @@ public class MemoStudy extends AppCompatActivity {
         });
 
         // 앨범 아이콘 선택 시 대화창
-        btn4_s.setOnClickListener(new View.OnClickListener() {
+        btn4_d.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                albumdialog = View.inflate(MemoStudy.this, R.layout.albumdialog, null);
+                albumdialog = View.inflate(MemoDaily.this, R.layout.albumdialog, null);
                 album_iv1 = albumdialog.findViewById(R.id.album_iv1);
                 album_btn1 = albumdialog.findViewById(R.id.album_btn1);
-                new AlertDialog.Builder(MemoStudy.this)
+                new AlertDialog.Builder(MemoDaily.this)
                         .setTitle("사진 선택")
                         .setIcon(R.drawable.photo)
                         .setView(albumdialog)
                         .setPositiveButton("확인", new DialogInterface.OnClickListener() {
                             @Override
                             public void onClick(DialogInterface dialogInterface, int i) {
-                                iv1_s.setImageBitmap(imageBitmap); // 카메라 사진
-                                iv2_s.setImageBitmap(bitmap); // 앨범 사진
+                                iv1_d.setImageBitmap(imageBitmap); // 카메라 사진
+                                iv2_d.setImageBitmap(bitmap); // 앨범 사진
 
                                 ByteArrayOutputStream albumStream = new ByteArrayOutputStream();
                                 bitmap.compress(Bitmap.CompressFormat.JPEG, 100, albumStream);
@@ -161,36 +165,40 @@ public class MemoStudy extends AppCompatActivity {
         });
 
         // 지도 보기
-        btn5_s.setOnClickListener(new View.OnClickListener() {
+        btn5_d.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(getApplicationContext(), com.example.termproject.MemoMap.class);
-                startActivityForResult(intent, GPS_ENABLE_REQUEST_CODE);
+                Intent intent = new Intent(getApplicationContext(), com.example.haru.MemoMap.class);
+                startActivityForResult(intent, GPS_MYLOCATION_REQUEST_CODE);
+
+                intent=getIntent();
+                address=intent.getStringExtra("address");
+                tv3_d.setText(address);
             }
         });
 
         // "감정" 버튼 클릭 시 색상 변경
-        rg_s.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
+        rg_d.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
             @Override
             public void onCheckedChanged(RadioGroup group, int checkedId) {
                 switch (checkedId) {
-                    case R.id.rb1_s: // 좋음
-                        rb1_s.setButtonTintList(ColorStateList.valueOf(Color.parseColor("#002EFF")));
-                        rb2_s.setButtonTintList(ColorStateList.valueOf(Color.parseColor("#000000")));
-                        rb3_s.setButtonTintList(ColorStateList.valueOf(Color.parseColor("#000000")));
-                        emotion = rb1_s.getText().toString();
+                    case R.id.rb1_d: // 좋음
+                        rb1_d.setButtonTintList(ColorStateList.valueOf(Color.parseColor("#002EFF")));
+                        rb2_d.setButtonTintList(ColorStateList.valueOf(Color.parseColor("#000000")));
+                        rb3_d.setButtonTintList(ColorStateList.valueOf(Color.parseColor("#000000")));
+                        emotion = rb1_d.getText().toString();
                         break;
-                    case R.id.rb2_s: // 중간
-                        rb1_s.setButtonTintList(ColorStateList.valueOf(Color.parseColor("#000000")));
-                        rb2_s.setButtonTintList(ColorStateList.valueOf(Color.parseColor("#002EFF")));
-                        rb3_s.setButtonTintList(ColorStateList.valueOf(Color.parseColor("#000000")));
-                        emotion = rb2_s.getText().toString();
+                    case R.id.rb2_d: // 중간
+                        rb1_d.setButtonTintList(ColorStateList.valueOf(Color.parseColor("#000000")));
+                        rb2_d.setButtonTintList(ColorStateList.valueOf(Color.parseColor("#002EFF")));
+                        rb3_d.setButtonTintList(ColorStateList.valueOf(Color.parseColor("#000000")));
+                        emotion = rb2_d.getText().toString();
                         break;
-                    case R.id.rb3_s: // 나쁨
-                        rb1_s.setButtonTintList(ColorStateList.valueOf(Color.parseColor("#000000")));
-                        rb2_s.setButtonTintList(ColorStateList.valueOf(Color.parseColor("#000000")));
-                        rb3_s.setButtonTintList(ColorStateList.valueOf(Color.parseColor("#002EFF")));
-                        emotion = rb3_s.getText().toString();
+                    case R.id.rb3_d: // 나쁨
+                        rb1_d.setButtonTintList(ColorStateList.valueOf(Color.parseColor("#000000")));
+                        rb2_d.setButtonTintList(ColorStateList.valueOf(Color.parseColor("#000000")));
+                        rb3_d.setButtonTintList(ColorStateList.valueOf(Color.parseColor("#002EFF")));
+                        emotion = rb3_d.getText().toString();
                         break;
                 }
                 return;
@@ -199,16 +207,16 @@ public class MemoStudy extends AppCompatActivity {
 
         //캘린더날짜
         intent=getIntent();
-        select7 = intent.getStringExtra("select7");
-        select8 = intent.getStringExtra("select8");
-        select9 = intent.getStringExtra("select9");
-        tv2_s.setText(select7+"년"+select8+"월"+select9+"일");
+        select1 = intent.getStringExtra("select1");
+        select2 = intent.getStringExtra("select2");
+        select3 = intent.getStringExtra("select3");
+        tv2_d.setText(select1+"년"+select2+"월"+select3+"일");
     }
 
     // 카메라 열기
     public void onCamera(View v){
         switch (v.getId()){
-            case R.id.btn3_s:
+            case R.id.btn3_d:
                 Intent intent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
                 startActivityForResult(intent, REQ_CODE_SELECT_CAMERA);
                 break;
@@ -233,7 +241,7 @@ public class MemoStudy extends AppCompatActivity {
                 case REQ_CODE_SELECT_CAMERA: // 카메라 선택
                     Bundle extras = data.getExtras();
                     imageBitmap = (Bitmap) extras.get("data");
-                    iv1_s.setImageBitmap(imageBitmap);
+                    iv1_d.setImageBitmap(imageBitmap);
 
                     ByteArrayOutputStream cameraStream = new ByteArrayOutputStream();
                     imageBitmap.compress(Bitmap.CompressFormat.JPEG, 100, cameraStream);
@@ -281,9 +289,9 @@ public class MemoStudy extends AppCompatActivity {
                         e.printStackTrace();
                     }
                     break;
-                case GPS_ENABLE_REQUEST_CODE:
+                case GPS_MYLOCATION_REQUEST_CODE:
                     if (resultCode == RESULT_OK) {
-                        tv3_s.setText(data.getStringExtra("address"));
+                        tv3_d.setText(data.getStringExtra("address"));
                     }
                     break;
             }

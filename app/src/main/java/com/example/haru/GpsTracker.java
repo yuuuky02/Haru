@@ -1,4 +1,4 @@
-package com.example.termproject;
+package com.example.haru;
 
 import android.app.Service;
 import android.content.Context;

@@ -1,4 +1,4 @@
-package com.example.termproject;
+package com.example.haru;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;

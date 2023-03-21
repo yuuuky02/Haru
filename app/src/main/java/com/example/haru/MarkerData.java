@@ -1,4 +1,4 @@
-package com.example.termproject;
+package com.example.haru;
 
 public class MarkerData {
     public int id;
