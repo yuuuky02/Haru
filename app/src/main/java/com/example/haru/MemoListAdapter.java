@@ -1,4 +1,4 @@
-package com.example.termproject;
+package com.example.haru;
 
 import android.app.AlertDialog;
 import android.content.ContentValues;
@@ -21,7 +21,6 @@ import android.widget.ImageView;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import androidx.annotation.RequiresApi;
 

@@ -1,13 +1,11 @@
-package com.example.termproject;
+package com.example.haru;
 
 import android.app.AlertDialog;
 import android.content.ContentValues;
-import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.res.ColorStateList;
 import android.database.sqlite.SQLiteDatabase;
-import android.database.sqlite.SQLiteOpenHelper;
 import android.graphics.Bitmap;
 import android.graphics.Canvas;
 import android.graphics.Color;
@@ -32,7 +30,7 @@ import androidx.core.app.ActivityCompat;
 import java.io.ByteArrayOutputStream;
 import java.io.IOException;
 
-public class MemoTrip extends AppCompatActivity {
+public class MemoStudy extends AppCompatActivity {
 
     MemoDBHelper memoHelper;
     SQLiteDatabase sqlDB;
@@ -44,12 +42,12 @@ public class MemoTrip extends AppCompatActivity {
     private static final int GPS_ENABLE_REQUEST_CODE = 300;
 
     Bitmap bitmap, imageBitmap;
-    Button btn1_t, btn2_t, btn3_t, btn4_t, btn5_t, album_btn1, album_btn2, album_btn3, album_btn4;
-    RadioGroup rg_t;
-    RadioButton rb1_t, rb2_t, rb3_t;
-    EditText et1_t;
-    TextView tv1_t, tv2_t, tv3_t;
-    ImageView iv1_t, iv2_t, album_iv1;
+    Button btn1_s, btn2_s, btn3_s, btn4_s, btn5_s, album_btn1, album_btn2, album_btn3, album_btn4;
+    RadioGroup rg_s;
+    RadioButton rb1_s, rb2_s, rb3_s;
+    EditText et1_s;
+    TextView tv1_s, tv2_s, tv3_s;
+    ImageView iv1_s, iv2_s, album_iv1;
 
     View albumdialog;
     Canvas canvas;
@@ -57,7 +55,7 @@ public class MemoTrip extends AppCompatActivity {
     Path path;
 
     Intent intent;
-    String select10, select11, select12;
+    String select7, select8, select9;
 
     String mode = "none";
     float upx = 0, upy = 0;
@@ -67,35 +65,35 @@ public class MemoTrip extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.memo_trip);
+        setContentView(R.layout.memo_study);
         ActivityCompat.requestPermissions(this, new String[]
                 {android.Manifest.permission.CAMERA,
                         android.Manifest.permission.ACCESS_FINE_LOCATION,
                         android.Manifest.permission.ACCESS_COARSE_LOCATION}, MODE_PRIVATE);
 
-        btn1_t = findViewById(R.id.btn1_t);
-        btn2_t = findViewById(R.id.btn2_t);
-        btn3_t = findViewById(R.id.btn3_t);
-        btn4_t = findViewById(R.id.btn4_t);
-        btn5_t = findViewById(R.id.btn5_t);
+        btn1_s = findViewById(R.id.btn1_s);
+        btn2_s = findViewById(R.id.btn2_s);
+        btn3_s = findViewById(R.id.btn3_s);
+        btn4_s = findViewById(R.id.btn4_s);
+        btn5_s = findViewById(R.id.btn5_s);
         album_btn1 = findViewById(R.id.album_btn1);
         album_btn2 = findViewById(R.id.album_btn2);
         album_btn3 = findViewById(R.id.album_btn3);
         album_btn4 = findViewById(R.id.album_btn4);
-        rg_t = findViewById(R.id.rg_t);
-        rb1_t = findViewById(R.id.rb1_t);
-        rb2_t = findViewById(R.id.rb2_t);
-        rb3_t = findViewById(R.id.rb3_t);
-        et1_t = findViewById(R.id.et1_t);
-        tv1_t = findViewById(R.id.tv1_t);
-        tv2_t = findViewById(R.id.tv2_t);
-        tv3_t = findViewById(R.id.tv3_t);
-        iv1_t = findViewById(R.id.iv1_t);
-        iv2_t = findViewById(R.id.iv2_t);
+        rg_s = findViewById(R.id.rg_s);
+        rb1_s = findViewById(R.id.rb1_s);
+        rb2_s = findViewById(R.id.rb2_s);
+        rb3_s = findViewById(R.id.rb3_s);
+        et1_s = findViewById(R.id.et1_s);
+        tv1_s = findViewById(R.id.tv1_s);
+        tv2_s = findViewById(R.id.tv2_s);
+        tv3_s = findViewById(R.id.tv3_s);
+        iv1_s = findViewById(R.id.iv1_s);
+        iv2_s = findViewById(R.id.iv2_s);
         album_iv1 = findViewById(R.id.album_iv1);
 
         // close
-        btn1_t.setOnClickListener(new View.OnClickListener() {
+        btn1_s.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(getApplicationContext(), Main_home.class);
@@ -105,18 +103,18 @@ public class MemoTrip extends AppCompatActivity {
 
         memoHelper = new MemoDBHelper(this);
         // 저장하기
-        btn2_t.setOnClickListener(new View.OnClickListener() {
+        btn2_s.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 ContentValues row;
                 sqlDB = memoHelper.getWritableDatabase();
                 row = new ContentValues();
-                row.put("date", tv2_t.getText().toString());     // 날짜
-                row.put("category", tv1_t.getText().toString()); // 카테고리
-                row.put("content", et1_t.getText().toString());  // 메모내용
+                row.put("date", tv2_s.getText().toString());     // 날짜
+                row.put("category", tv1_s.getText().toString()); // 카테고리
+                row.put("content", et1_s.getText().toString());  // 메모내용
                 row.put("camera", byteArrayCamera);             // 카메라 사진
                 row.put("album", byteArrayAlbum);               // 앨범 사진
-                row.put("address", tv3_t.getText().toString()); // 주소
+                row.put("address", tv3_s.getText().toString()); // 주소
                 row.put("emotion", emotion);                    // 감정
                 sqlDB.insert("memo", null, row);
                 memoHelper.close();
@@ -127,21 +125,21 @@ public class MemoTrip extends AppCompatActivity {
         });
 
         // 앨범 아이콘 선택 시 대화창
-        btn4_t.setOnClickListener(new View.OnClickListener() {
+        btn4_s.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                albumdialog = View.inflate(MemoTrip.this, R.layout.albumdialog, null);
+                albumdialog = View.inflate(MemoStudy.this, R.layout.albumdialog, null);
                 album_iv1 = albumdialog.findViewById(R.id.album_iv1);
                 album_btn1 = albumdialog.findViewById(R.id.album_btn1);
-                new AlertDialog.Builder(MemoTrip.this)
+                new AlertDialog.Builder(MemoStudy.this)
                         .setTitle("사진 선택")
                         .setIcon(R.drawable.photo)
                         .setView(albumdialog)
                         .setPositiveButton("확인", new DialogInterface.OnClickListener() {
                             @Override
                             public void onClick(DialogInterface dialogInterface, int i) {
-                                iv1_t.setImageBitmap(imageBitmap); // 카메라 사진
-                                iv2_t.setImageBitmap(bitmap); // 앨범 사진
+                                iv1_s.setImageBitmap(imageBitmap); // 카메라 사진
+                                iv2_s.setImageBitmap(bitmap); // 앨범 사진
 
                                 ByteArrayOutputStream albumStream = new ByteArrayOutputStream();
                                 bitmap.compress(Bitmap.CompressFormat.JPEG, 100, albumStream);
@@ -161,36 +159,36 @@ public class MemoTrip extends AppCompatActivity {
         });
 
         // 지도 보기
-        btn5_t.setOnClickListener(new View.OnClickListener() {
+        btn5_s.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(getApplicationContext(), com.example.termproject.MemoMap.class);
+                Intent intent = new Intent(getApplicationContext(), com.example.haru.MemoMap.class);
                 startActivityForResult(intent, GPS_ENABLE_REQUEST_CODE);
             }
         });
 
         // "감정" 버튼 클릭 시 색상 변경
-        rg_t.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
+        rg_s.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
             @Override
             public void onCheckedChanged(RadioGroup group, int checkedId) {
                 switch (checkedId) {
-                    case R.id.rb1_t: // 좋음
-                        rb1_t.setButtonTintList(ColorStateList.valueOf(Color.parseColor("#002EFF")));
-                        rb2_t.setButtonTintList(ColorStateList.valueOf(Color.parseColor("#000000")));
-                        rb3_t.setButtonTintList(ColorStateList.valueOf(Color.parseColor("#000000")));
-                        emotion = rb1_t.getText().toString();
+                    case R.id.rb1_s: // 좋음
+                        rb1_s.setButtonTintList(ColorStateList.valueOf(Color.parseColor("#002EFF")));
+                        rb2_s.setButtonTintList(ColorStateList.valueOf(Color.parseColor("#000000")));
+                        rb3_s.setButtonTintList(ColorStateList.valueOf(Color.parseColor("#000000")));
+                        emotion = rb1_s.getText().toString();
                         break;
-                    case R.id.rb2_t: // 중간
-                        rb1_t.setButtonTintList(ColorStateList.valueOf(Color.parseColor("#000000")));
-                        rb2_t.setButtonTintList(ColorStateList.valueOf(Color.parseColor("#002EFF")));
-                        rb3_t.setButtonTintList(ColorStateList.valueOf(Color.parseColor("#000000")));
-                        emotion = rb2_t.getText().toString();
+                    case R.id.rb2_s: // 중간
+                        rb1_s.setButtonTintList(ColorStateList.valueOf(Color.parseColor("#000000")));
+                        rb2_s.setButtonTintList(ColorStateList.valueOf(Color.parseColor("#002EFF")));
+                        rb3_s.setButtonTintList(ColorStateList.valueOf(Color.parseColor("#000000")));
+                        emotion = rb2_s.getText().toString();
                         break;
-                    case R.id.rb3_t: // 나쁨
-                        rb1_t.setButtonTintList(ColorStateList.valueOf(Color.parseColor("#000000")));
-                        rb2_t.setButtonTintList(ColorStateList.valueOf(Color.parseColor("#000000")));
-                        rb3_t.setButtonTintList(ColorStateList.valueOf(Color.parseColor("#002EFF")));
-                        emotion = rb3_t.getText().toString();
+                    case R.id.rb3_s: // 나쁨
+                        rb1_s.setButtonTintList(ColorStateList.valueOf(Color.parseColor("#000000")));
+                        rb2_s.setButtonTintList(ColorStateList.valueOf(Color.parseColor("#000000")));
+                        rb3_s.setButtonTintList(ColorStateList.valueOf(Color.parseColor("#002EFF")));
+                        emotion = rb3_s.getText().toString();
                         break;
                 }
                 return;
@@ -199,16 +197,16 @@ public class MemoTrip extends AppCompatActivity {
 
         //캘린더날짜
         intent=getIntent();
-        select10 = intent.getStringExtra("select10");
-        select11 = intent.getStringExtra("select11");
-        select12 = intent.getStringExtra("select12");
-        tv2_t.setText(select10+"년"+select11+"월"+select12+"일");
+        select7 = intent.getStringExtra("select7");
+        select8 = intent.getStringExtra("select8");
+        select9 = intent.getStringExtra("select9");
+        tv2_s.setText(select7+"년"+select8+"월"+select9+"일");
     }
 
     // 카메라 열기
     public void onCamera(View v){
         switch (v.getId()){
-            case R.id.btn3_t:
+            case R.id.btn3_s:
                 Intent intent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
                 startActivityForResult(intent, REQ_CODE_SELECT_CAMERA);
                 break;
@@ -233,7 +231,7 @@ public class MemoTrip extends AppCompatActivity {
                 case REQ_CODE_SELECT_CAMERA: // 카메라 선택
                     Bundle extras = data.getExtras();
                     imageBitmap = (Bitmap) extras.get("data");
-                    iv1_t.setImageBitmap(imageBitmap);
+                    iv1_s.setImageBitmap(imageBitmap);
 
                     ByteArrayOutputStream cameraStream = new ByteArrayOutputStream();
                     imageBitmap.compress(Bitmap.CompressFormat.JPEG, 100, cameraStream);
@@ -283,7 +281,7 @@ public class MemoTrip extends AppCompatActivity {
                     break;
                 case GPS_ENABLE_REQUEST_CODE:
                     if (resultCode == RESULT_OK) {
-                        tv3_t.setText(data.getStringExtra("address"));
+                        tv3_s.setText(data.getStringExtra("address"));
                     }
                     break;
             }

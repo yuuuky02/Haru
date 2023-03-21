@@ -1,6 +1,4 @@
-package com.example.termproject;
-
-import static android.app.Activity.RESULT_OK;
+package com.example.haru;
 
 import android.app.AlertDialog;
 import android.content.ContentValues;
@@ -8,37 +6,25 @@ import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.res.ColorStateList;
-import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
-import android.graphics.Canvas;
 import android.graphics.Color;
-import android.graphics.Paint;
-import android.graphics.Path;
 import android.os.Build;
-import android.os.Bundle;
-import android.provider.MediaStore;
 import android.view.LayoutInflater;
-import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
-import android.widget.ListView;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import androidx.annotation.Nullable;
 import androidx.annotation.RequiresApi;
 
-import java.io.ByteArrayOutputStream;
-import java.io.IOException;
-import java.sql.Blob;
 import java.util.ArrayList;
 
 public class ListViewAdapter extends BaseAdapter {

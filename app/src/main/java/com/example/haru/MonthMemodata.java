@@ -1,4 +1,4 @@
-package com.example.termproject;
+package com.example.haru;
 
 import androidx.annotation.RequiresApi;
 import androidx.appcompat.app.AlertDialog;
